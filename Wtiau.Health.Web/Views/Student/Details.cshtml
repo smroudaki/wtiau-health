@@ -1,0 +1,682 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_StudentDetails
+
+@{
+    ViewBag.Title = "اطلاعات کاربر";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Student")" data-toggle="tooltip" data-placement="auto" title="دانشجویان">@ViewBag.StudentDisplay</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+    @*<div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+            <a href="@Url.Action("Index")">
+                <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+            </a>
+        </div>*@
+
+    @*<div class="pull-left">
+            <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+        </div>*@
+</div>
+
+<main class="panel row userprofile-main">
+
+    <aside class="col-md-3">
+
+        <div class="text-center userprofile-img">
+            <img src="~/Content/Images/abstract-user-flat-3.png" />
+        </div>
+
+        <div class="text-center userprofile-aside-btn-regine">
+            <a href="@Url.Action("ChangeInfo", "Student", new { id = Model.ID })" class="btn btn-warning fa fa-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات هویتی' style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a href="javascript:void(0)" onclick="ChangeHealthInfo(@Model.ID)" class="btn btn-primary fa fa-edit" data-toggle='tooltip' data-placement='auto' title='ویرایش اطلاعات سلامت' style="margin: 0 10px; padding: 9px 13px;"></a>
+            <a href="javascript:void(0)" onclick="Delete(@Model.ID)" class="btn btn-danger fa fa-trash" data-toggle='tooltip' data-placement='auto' title='حذف' style="margin: 0 10px; padding: 9px 13px;"></a>
+        </div>
+
+        <div>
+            <ul class="nav userprofile-aside-item">
+                <li>@Model.StudentCode</li>
+                <li>@Model.NationalCode</li>
+                <li>@Model.College</li>
+                <li>@Model.Grade</li>
+                <li>@Model.Branch</li>
+            </ul>
+        </div>
+
+    </aside>
+
+    <section class="col-md-9 userprofile-section">
+
+        <ul class=" nav nav-tabs nav-justified userprofile-section-tabs">
+            <li class="active"><a href="#Description" data-toggle="tab">پرسش نامه ها</a></li>
+            <li><a href="#Details" data-toggle="tab">اطلاعات هویتی</a></li>
+            <li><a href="#Setting" data-toggle="tab">اطلاعات سلامت</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div class="tab-pane fade in active" id="Description">
+                <div class="panel-group" id="gp">
+                    @foreach (var form in Model.Forms)
+                    {
+                        <div class="panel userprofile-File-panel">
+
+                            <a href="#@form.Display" data-parent="#gp" data-toggle="collapse">
+                                <div class="panel-heading userprofile-File-heading">
+                                    <h4 class="panel-title userprofile-File-titel">
+                                        @form.Name
+                                    </h4>
+                                </div>
+                            </a>
+
+                            <div id="@form.Display" class="panel-collapse collapse">
+                                <div class="slim-scroll panel-body userprofile-File-body">
+                                    @{
+                                        int i = 1;
+
+                                        foreach (var question in form.Questions)
+                                        {
+                                            <p>@(i++):&nbsp;@question.Name</p>
+
+                                            foreach (var response in question.Responses)
+                                            {
+                                                <p>-&nbsp;@response</p>
+                                            }
+
+                                            <br />
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Details" style="margin-top:15px">
+                <div id="Details-tabel">
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Name == null ? "ثبت نشده" : Model.Name)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Family)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Family == null ? "ثبت نشده" : Model.Family)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Email == null ? "ثبت نشده" : Model.Email)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.StudentCode)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.StudentCode
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.NationalCode)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @Model.NationalCode
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Mobile)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Mobile == null ? "ثبت نشده" : Model.Mobile)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Phone)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Phone == null ? "ثبت نشده" : Model.Phone)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Gender)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Gender == null ? "ثبت نشده" : Model.Gender)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.BirthYear)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.BirthYear == null ? "ثبت نشده" : Model.BirthYear)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.National)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.National == null ? "ثبت نشده" : Model.National)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Blood)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Blood == null ? "ثبت نشده" : Model.Blood)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Insurance)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Insurance == null ? "ثبت نشده" : Model.Insurance)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.HomeType)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.HomeType == null ? "ثبت نشده" : Model.HomeType)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Marriage)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Marriage == null ? "ثبت نشده" : Model.Marriage)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.University)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.University == null ? "ثبت نشده" : Model.University)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.College)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.College == null ? "ثبت نشده" : Model.College)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.Branch)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.Branch == null ? "ثبت نشده" : Model.Branch)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.BirthLocation)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.BirthLocation == null ? "ثبت نشده" : Model.BirthLocation)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row userprofile-detiles-item" style="">
+                        <div class="col-md-3 userprofile-detiles-col-3-main">
+                            <div class="panel userprofile-detiles-col-3 ">
+                                <span class="userprofile-detiles-text">
+                                    @Html.DisplayNameFor(model => model.BeforeUniversity)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel userprofile-detiles-col-9">
+                                <span class="userprofile-detiles-text">
+                                    @(Model.BeforeUniversity == null ? "ثبت نشده" : Model.BeforeUniversity)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="Setting" style="margin-top:15px">
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.Height)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @(Model.Height == 0 ? "ثبت نشده" : Model.Height.ToString())
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.Weight)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @(Model.Weight == 0 ? "ثبت نشده" : Model.Weight.ToString())
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.BloodSuger)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @(Model.BloodSuger == 0 ? "ثبت نشده" : Model.BloodSuger.ToString())
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.BloodPressureMin)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @(Model.BloodPressureMin == 0 ? "ثبت نشده" : Model.BloodPressureMin.ToString())
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.BloodPressureMax)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @(Model.BloodPressureMax == 0 ? "ثبت نشده" : Model.BloodPressureMax.ToString())
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row userprofile-detiles-item" style="">
+                    <div class="col-md-3 userprofile-detiles-col-3-main">
+                        <div class="panel userprofile-detiles-col-3 ">
+                            <span class="userprofile-detiles-text">
+                                @Html.DisplayNameFor(model => model.BMI)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel userprofile-detiles-col-9">
+                            <span class="userprofile-detiles-text">
+                                @(Model.BMI == 0 ? "ثبت نشده" : Model.BMI.ToString())
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            @*<div class="tab-pane fade" id="Setting">
+                    <div class="panel setting-col" style="line-height:40px;">
+                        <div class="pull-left setting-col-titel">
+                            <i class="glyphicon glyphicon-cog setting-col-titel-icon"></i>
+                            تغیر رمز عبور
+                        </div>
+
+                        <div class="pull-right ">
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangePassword(000)"></a>
+                        </div>
+                    </div>
+
+                    <div class="panel setting-col" style="line-height:40px;">
+                        <div class="pull-left setting-col-titel">
+                            <i class="glyphicon glyphicon-cog setting-col-titel-icon"></i>
+                            ویرایش نقش
+                        </div>
+
+                        <div class="pull-right ">
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangeBaseRole(000)"></a>
+                        </div>
+                    </div>
+
+                    <div class="panel setting-col" style="line-height:40px;">
+                        <div class="pull-left setting-col-titel">
+                            <i class="glyphicon glyphicon-cog setting-col-titel-icon"></i>
+                            ویرایش اطلاعات
+                        </div>
+
+                        <div class="pull-right ">
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" onclick="ChangeUserInfo(000)"></a>
+                        </div>
+                    </div>
+
+                    <div class="panel setting-col" style="line-height:40px;">
+                        <div class="pull-left setting-col-titel">
+                            <i class="glyphicon glyphicon-cog setting-col-titel-icon"></i>
+                            حذف کاربر
+                        </div>
+
+                        <div class="pull-right ">
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="DeleteUser(000)"></a>
+                        </div>
+                    </div>
+
+                    @if (false)
+                    {
+                        <div class="panel setting-col" style="line-height:40px;">
+                            <div class="pull-left setting-col-titel">
+                                <i class="glyphicon glyphicon-cog setting-col-titel-icon"></i>
+                                تعلیق کاربر
+                            </div>
+
+                            <div class="pull-right ">
+                                <a class="control btn btn-danger btn-sm fa fa-user-slash" style="line-height: 18px;padding-left: 9px;padding-right: 9px;" onclick="BanUser(000)"></a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="panel setting-col" style="line-height:40px;">
+                            <div class="pull-left setting-col-titel">
+                                <i class="glyphicon glyphicon-cog setting-col-titel-icon"></i>
+                                رفع تعلیق
+                            </div>
+
+                            <div class="pull-right ">
+                                <a class="control btn btn-success btn-sm fa fa-user" style="line-height: 18px;padding-left: 11px;padding-right: 11px;" onclick="BanUser(000)"></a>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>*@
+
+        </div>
+
+    </section>
+
+</main>
+
+@Html.Partial("_Modal")
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            $('.slim-scroll').slimScroll({
+                height: '370px'
+            });
+
+            $('#Details-tabel').slimScroll({
+                height: '450px'
+            });
+
+        });
+    </script>
+
+    <script>
+
+        function ChangeInfo(id) {
+            $.ajax({
+                url: "/Student/ChangeInfo/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('تغییر اطلاعات هویتی دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function ChangeHealthInfo(id) {
+            $.ajax({
+                url: "/Student/ChangeHealthInfo/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                if (!result.startsWith("<!DOCTYPE html>")) {
+                    $('#myModal').modal('show');
+                    $('#myModalLabel').html('تغییر اطلاعات سلامت دانشجو');
+                    $('#myModalBody').html(result);   
+                } else {
+                    toastr.error("اطلاعات سلامت دانشجوی مورد نظر در سامانه ثبت نشده است.");              
+                }
+            });
+        }
+
+        function Delete(id) {
+            $.ajax({
+                url: "/Student/Delete/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                if (!result.startsWith("<!DOCTYPE html>")) {
+                    $('#myModal').modal('show');
+                    $('#myModalLabel').html('حذف دانشجو');
+                    $('#myModalBody').html(result);   
+                } else {
+                    toastr.error("اطلاعات هویتی دانشجوی مورد نظر در سامانه ثبت نشده است.");              
+                }
+            });
+        }
+
+    </script>
+}

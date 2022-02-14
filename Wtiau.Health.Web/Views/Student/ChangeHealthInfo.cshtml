@@ -1,0 +1,96 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_StudentHealthInformation
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="modal-main">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BloodSuger, htmlAttributes: new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.BloodSuger, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.BloodSuger, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BloodPressureMin, htmlAttributes: new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.BloodPressureMin, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.BloodPressureMin, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BloodPressureMax, htmlAttributes: new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.BloodPressureMax, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.BloodPressureMax, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Height, htmlAttributes: new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+        </div>
+
+        <hr />
+        <div id="BMI" class="text-center" style="font-size: 20px; margin-bottom: -10px;">
+            <label id="BMI">BMI: </label>
+            <span>0.00</span>
+        </div>
+        <hr />
+
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button class="btn btn-danger modal-btn-Dual pull-left" type="button" data-dismiss="modal">انصراف</button>
+        <button class="btn btn-success modal-btn-Dual pull-right" type="submit" name="btn-Delete">تایید</button>
+    </div>
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        CalBMI($('#Height').val(), $('#Weight').val());
+
+        jQuery('#Height').on('input', function () {
+            CalBMI($('#Height').val(), $('#Weight').val());
+        });
+
+        jQuery('#Weight').on('input', function () {
+            CalBMI($('#Height').val(), $('#Weight').val());
+        });
+
+        function CalBMI(height, weight) {
+            if (height != '' && weight != '') {
+                var BMI = weight / Math.pow(height / 100, 2);
+                $('#BMI span').html(BMI.toFixed(2));
+            } else {
+                $('#BMI span').html("0.00");
+            }
+        }
+
+    });
+</script>

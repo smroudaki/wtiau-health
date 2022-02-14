@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_RoleList>
+
+@{
+    ViewBag.Title = "نقش ها";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Setting")" data-toggle="tooltip" data-placement="auto" title="تنظیمات">تنظیمات</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+    @*<div class="pull-left">
+            <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+        </div>*@
+
+    @*<div class="pull-right">
+            <a href="javascript:void(0)" onclick="Create()" data-toggle='tooltip' data-placement='auto' title='افزودن تایم'>
+                <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+            </a>
+        </div>*@
+
+</div>
+
+
+
+<div class="panel panel-default">
+
+    <div class="panel-body table-body" style="overflow-x:auto;">
+
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Display)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Level)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int x = 0;
+                }
+
+                @foreach (var item in Model)
+                {
+                    x++;
+
+                    <tr>
+                        <td scope="row">@x</td>
+                        <td scope="row">
+                            <span>@Html.DisplayFor(modelItem => item.Display)</span>
+                        </td>
+                        <td scope="row">
+                            <span>@Html.DisplayFor(modelItem => item.Name)</span>
+                        </td>
+                        <td scope="row">
+                            <span>@Html.DisplayFor(modelItem => item.Level)</span>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+

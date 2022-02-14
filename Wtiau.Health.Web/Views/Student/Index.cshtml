@@ -1,0 +1,250 @@
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_StudentList>
+
+@{
+    ViewBag.Title = "دانشجویان";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+    @*<div class="pull-left">
+            <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+        </div>*@
+
+    <div class="dropdown pull-right" style="margin:0px 5px;">
+
+        <a id="NavDropOption" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" data-placement='auto' title='خروجی'>
+            <i class="glyphicon glyphicon-option-vertical navigation-btn-icon"></i>
+        </a>
+
+        <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
+
+            <li>
+                <a href="@Url.Action("Excel_AllStudents", "Student")">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    تمام دانشجویان
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Excel_NotRegisterStudents", "Student")">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    دانشجویان ثبت نام نکرده
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="Form_Export()">
+                    <i class="glyphicon glyphicon-cloud-download"></i>
+                    فرم ها
+                </a>
+            </li>
+
+
+        </ul>
+
+    </div>
+
+    <div class="dropdown pull-right" style="margin:0px 5px;">
+
+        <a id="NavDropOption" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" data-placement='auto' title='خروجی'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
+
+        <ul id="menu" class="dropdown-menu" aria-labelledby="NavDropOption" style="margin-top: 8px;">
+
+            <li>
+                <a href="javascript:void(0)" onclick="Create()">
+                    <i class="glyphicon glyphicon-education"></i>
+                    افزودن تکی
+                </a>
+            </li>
+
+            <li>
+                <a href="javascript:void(0)" onclick="Import()">
+                    <i class="glyphicon glyphicon-import"></i>
+                    افزودن گروهی
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    @*<div class="pull-right" style="margin:0px 5px;" data-toggle='tooltip' data-placement='auto' title='افزودن دانشجو'>
+            <a href="javascript:void(0)" onclick="Create()">
+                <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+            </a>
+        </div>*@
+
+</div>
+
+<div class="panel panel-default">
+
+    <div class="panel-body table-body" style="overflow-x:auto;">
+
+        <table id="StudentsDataTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Code)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_National)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Family)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Form1)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Form2)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Turn)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Info)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_HealthInfo)</th>
+                    <th scope="col">کنترل</th>
+                </tr>
+            </thead>
+
+        </table>
+
+    </div>
+
+</div>
+
+@Html.Partial("_Modal")
+
+@section Modal {
+
+    <script>
+
+        function Create() {
+            $.ajax({
+                url: "/Student/Create",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Import() {
+            $.ajax({
+                url: "/Student/ImportStudentFromExcel",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Delete(id) {
+            $.ajax({
+                url: "/Student/Delete/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                if (!result.startsWith("<!DOCTYPE html>")) {
+                    $('#myModal').modal('show');
+                    $('#myModalLabel').html('حذف دانشجو');
+                    $('#myModalBody').html(result);
+                } else {
+                    toastr.error("اطلاعات هویتی دانشجوی مورد نظر در سامانه ثبت نشده است.");
+                }
+            });
+        }
+
+        function Form_Export() {
+            $.ajax({
+                url: "/Student/Excel_Form/",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function CreateHealthInformation(id) {
+            $.ajax({
+                url: "/Student/CreateHealthInformation/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('ثبت اطلاعات سلامت دانشجو');
+                $('#myModalBody').html(result);
+            });
+        }
+
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+           $('#StudentsDataTable').DataTable({
+                "ajax": {
+                    "url": "/Student/GetStudents",
+                    "type": "POST",
+                    "datatype": "json",
+                },
+                "columns": [
+                    { "data": "Student_Code", "name": "Student_Code" },
+                    { "data": "Student_National", "name": "Student_National" },
+                    { "data": "Student_Name", "name": "Student_Name" },
+                    { "data": "Student_Family", "name": "Student_Family" },
+                    { "data": "Student_Form1", "name": "Student_Form1" },
+                    { "data": "Student_Form2", "name": "Student_Form2" },
+                    { "data": "Student_Turn", "name": "Student_Turn" },
+                    { "data": "Student_Info", "name": "Student_Info" },
+                    { "data": "Student_HealthInfo", "name": "Student_HealthInfo" },
+                    {
+                        "data": "ID", "render": function (data) {
+                            return "<a class='control btn btn-warning btn-sm glyphicon glyphicon-scale' data-toggle='tooltip' data-placement='auto' title='ثبت اطلاعات سلامت' href='javascript:void(0)' onclick='CreateHealthInformation(" + data + ")'></a>&nbsp;" +
+                                   "<a class='control btn btn-info btn-sm glyphicon glyphicon-list' data-toggle='tooltip' data-placement='auto' title='اطلاعات کاربر' href='@Url.Action("Details", "Student")/" + data + "'></a>&nbsp;" +
+                                   "<a class='control btn btn-danger btn-sm glyphicon glyphicon-trash' data-toggle='tooltip' data-placement='auto' title='حذف' href='javascript:void(0)' onclick='Delete(" + data + ")'></a>&nbsp;";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px"
+                    }
+                ],
+                "serverSide": true,
+                "order": [0, "asc"],
+                "processing": true,
+                "language": {
+                    "sEmptyTable": "هیچ داده ای در جدول وجود ندارد",
+                    "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                    "sInfoEmpty": "نمایش 0 تا 0 از 0 رکورد",
+                    "sInfoFiltered": "(فیلتر شده از _MAX_ رکورد)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ",",
+                    "sLengthMenu": "_MENU_",
+                    "sLoadingRecords": "در حال بارگزاری...",
+                    "sProcessing": "در حال پردازش...",
+                    "sSearch": "",
+                    "sSearchPlaceholder": "جستجو",
+                    "sZeroRecords": "رکوردی با این مشخصات پیدا نشد",
+                    "oPaginate": {
+                        "sFirst": "ابتدا",
+                        "sLast": "انتها",
+                        "sNext": "بعدی",
+                        "sPrevious": "قبلی"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": فعال سازی نمایش به صورت صعودی",
+                        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                    }
+                },
+                "scrollX": true
+            });
+        });
+
+    </script>
+
+}

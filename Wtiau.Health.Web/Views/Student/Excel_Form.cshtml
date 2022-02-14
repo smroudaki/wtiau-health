@@ -1,0 +1,28 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_FormExport
+@using Wtiau.Health.Web.Models.Repository
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="modal-main">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.ID, new Rep_SelectItems().Get_AllForm(), new { @class = "form-control Select2_Normal" })
+        </div>
+
+
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button class="btn btn-danger modal-btn-Dual pull-left" type="button" data-dismiss="modal">انصراف</button>
+        <button class="btn btn-success modal-btn-Dual pull-right" type="submit" name="btn-Delete">تایید</button>
+    </div>
+}
+
+
+<script src="~/Scripts/Plugins/jQuery.Select2/select2.js"></script>
+<script src="~/Scripts/Plugins/jQuery.Select2/i18n/fa.js"></script>
+
+<script src="~/Scripts/MyScripts/Select2_Config.js"></script>

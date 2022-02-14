@@ -1,0 +1,102 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_TakeTurn
+@using Wtiau.Health.Web.Models.Repository
+
+@{
+    ViewBag.Title = "نوبت دهی";
+    Layout = "~/Views/Shared/_Portal.cshtml";
+}
+
+<h2>Index</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="panel panel-default" style="margin: 0 auto;max-width:600px;">
+        <div class="panel-body">
+            <div class="text-center">
+                <h3>تعیین نوبت</h3>
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Turn, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.Turn, new Rep_SelectItems().Get_AllTurn(), new { @class = "form-control Select2_Normal" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Turn, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sheft, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.Sheft, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "لطفا کاربر مورد نظر را انتخاب کنید ..." } }, new { @class = "Sheft form-control Select2_Normal" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Sheft, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Discription, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Discription, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Discription, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div>
+                <button class="btn btn-success btn-block " type="submit" name="btn-Delete">ثبت</button>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+}
+
+
+
+@section Scripts{
+
+    <script>
+
+        $("#Turn").on("change", function () {
+            var TurnID = document.getElementById("Turn").value;
+
+            console.log(TurnID);
+
+            $.ajax({
+                url: "/PortalTakeTurn/Get_ShiftList?TurnID=" + TurnID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".Sheft").empty();
+                    $.each(data, function (index, row) {
+                        $(".Sheft").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+
+        $("#Turn").ready(function () {
+            var TurnID = document.getElementById("Turn").value;
+
+            console.log(TurnID);
+
+            $.ajax({
+                url: "/PortalTakeTurn/Get_ShiftList?TurnID=" + TurnID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".Sheft").empty();
+                    $.each(data, function (index, row) {
+                        $(".Sheft").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+
+
+    </script>
+
+}

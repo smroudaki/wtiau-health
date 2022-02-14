@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_QusetionList>
+@using Wtiau.Health.Web.Models.Repository
+
+@{
+    ViewBag.Title = "سوالات";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Form")" data-toggle="tooltip" data-placement="auto" title="پرسش نامه ها">@ViewBag.FormDisplay</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+    @*<div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+        <a href="@Url.Action("Index", "Form")">
+            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+        </a>
+    </div>*@
+
+    @*<div class="pull-left">
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+    </div>*@
+
+    <div class="pull-right">
+        <a href="javascript:void(0)" onclick="Create(@ViewBag.FormId)" data-toggle='tooltip' data-placement='auto' title='افزودن سوال'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
+    </div>
+
+</div>
+
+<div class="panel panel-default">
+
+    <div class="panel-body table-body" style="overflow-x:auto;">
+
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.type)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.step)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Lie)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.ResponseCount)</th>
+                    <th scope="col" data-orderable="false">کنترل</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int x = 0;
+                }
+
+                @foreach (var item in Model)
+                {
+                    x++;
+
+                    <tr>
+                        <td scope="row">@x</td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Name) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Rep_CodeGroup.Get_CodeDisplayWithID(item.type) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.step) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Lie) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.ResponseCount) </span>
+                        </td>
+
+                        <td scope="row">
+                            <a class="control btn btn-info btn-sm glyphicon glyphicon-list" data-toggle='tooltip' data-placement='auto' title='پاسخ ها' href="@Url.Action("Index", "Response", new { id = item.ID, formId = ViewBag.FormId, formDisplay = ViewBag.FormDisplay, questionDisplay = item.Name })"></a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+@Html.Partial("_Modal")
+
+@section Modal {
+
+    <script>
+
+        function Delete(id) {
+            $.ajax({
+                url: "/Question/QuestionDelete/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('حدف سوال');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Create(id) {
+            $.ajax({
+                url: "/Question/QuestionCreate/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن سوال');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Edit(id) {
+            $.ajax({
+                url: "/Question/QuestionEdit/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('ویرایش سوال');
+                $('#myModalBody').html(result);
+            });
+        }
+
+    </script>
+
+}

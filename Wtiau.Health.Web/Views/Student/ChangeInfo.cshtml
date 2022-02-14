@@ -1,0 +1,295 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_StudentInfoEdit
+@using Wtiau.Health.Web.Models.Repository
+
+@{
+    ViewBag.Title = "تغییر اطلاعات فردی";
+    Layout = "~/Views/Shared/_Portal.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="panel panel-default" style="margin: 0 auto;max-width:1500px;">
+        <div class="panel-body">
+
+            <div class="text-center">
+                <h3>فرم تغییر اطلاعات فردی</h3>
+            </div>
+
+            <hr />
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Family, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                @Html.EditorFor(model => model.Family, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Family, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Gender, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.Gender), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BirthYear, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.BirthYear, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.BirthYear), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.BirthYear, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.National, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.National, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.Nationality), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.National, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BirthLocation, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                <span class=" input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                @Html.EditorFor(model => model.BirthLocation, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.BirthLocation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                <span class=" input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                <span class=" input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                <span class=" input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.HomeType, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.HomeType, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.HomeType), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.HomeType, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Marriage, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Marriage, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.Marriage), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Marriage, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.University, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.University, new Rep_SelectItems().Get_AllUnivercity(), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.University, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.College, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.College, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "", } }, new { @class = "College form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.College, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Grad, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Grad, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "", } }, new { @class = " Grad form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Grad, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Branch, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Branch, new List<SelectListItem>() { new SelectListItem() { Value = "", Text = "", } }, new { @class = "Branch form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BeforeUniversity, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group">
+                                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                @Html.EditorFor(model => model.BeforeUniversity, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.BeforeUniversity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Blood, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Blood, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.BloodGroup), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Blood, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Insurance, htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Insurance, Rep_CodeGroup.Get_AllCodesWithGroupID((int)CodeGroup.Insurance), new { @class = "form-control Select2_Normal" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Insurance, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+                <button class="btn btn-success pull-right" style="width:150px" type="submit" name="btn-Delete">ثبت</button>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+    <script>
+
+        $("#University").on("change", function () {
+            var UnivercityID = document.getElementById("University").value;
+
+            console.log(UnivercityID);
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_CollageList?UnivercityID=" + UnivercityID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".College").empty();
+                    $(".College").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".College").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+        $("#University").ready(function () {
+            var UnivercityID = document.getElementById("University").value;
+
+            console.log(UnivercityID);
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_CollageList?UnivercityID=" + UnivercityID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".College").empty();
+                    $(".College").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".College").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+        $("#College").on("change", function () {
+            var CollegeID = document.getElementById("College").value;
+
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_GradeList?CollageID=" + CollegeID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".Grad").empty();
+                    $(".Grad").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".Grad").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+        $("#Grad").on("change", function () {
+            var GradID = document.getElementById("Grad").value;
+
+
+            $.ajax({
+                url: "/PortalStudentInfo/Get_BranchList?GradeID=" + GradID,
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    $(".Branch").empty();
+                    $(".Branch").append("<option></option>")
+                    $.each(data, function (index, row) {
+                        $(".Branch").append("<option value='" + row.id + "'>" + row.text + "</option>")
+                    });
+                }
+            })
+        });
+
+    </script>
+
+}

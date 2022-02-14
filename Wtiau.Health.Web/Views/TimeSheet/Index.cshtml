@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_TimeSheetList>
+@using Wtiau.Health.Web.Models.Repository
+
+@{
+    ViewBag.Title = "شیفت های کاری";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Turn")" data-toggle="tooltip" data-placement="auto" title="تایم های کاری">@ViewBag.TurnDisplay</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+     @*<div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+        <a href="@Url.Action("Index", "Turn")">
+            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+        </a>
+    </div>*@
+
+    @*<div class="pull-left">
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+    </div>*@
+
+    <div class="pull-right">
+        <a href="javascript:void(0)" onclick="Create(@ViewBag.ID)" data-toggle='tooltip' data-placement='auto' title='افزودن شیفت'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
+    </div>
+
+</div>
+
+<div class="panel panel-default">
+
+    <div class="panel-body table-body" style="overflow-x:auto;">
+
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.MaxSize)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Size)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Activeness)</th>
+                    <th scope="col" data-orderable="false">کنترل</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int x = 0;
+                }
+
+                @foreach (var item in Model)
+                {
+                    x++;
+
+                    <tr>
+                        <td scope="row">@x</td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.name) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.MaxSize) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Size) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Activeness) </span>
+                        </td>
+
+                        <td scope="row">
+                            <a class="control btn btn-info btn-sm glyphicon glyphicon-list" data-toggle='tooltip' data-placement='auto' title='لیست دانشجویان' href="@Url.Action("Index", "StudentsTimeSheet", new { id = item.ID, turnID = ViewBag.ID, turnDisplay = ViewBag.TurnDisplay, timeSheetDisplay = item.name })"></a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+@Html.Partial("_Modal")
+
+@section Modal {
+
+    <script>
+
+        function Delete(id) {
+            $.ajax({
+                url: "/TimeSheet/TimeSheetDelete/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('حدف شیفت');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Create(id) {
+            $.ajax({
+                url: "/TimeSheet/TimeSheetAdd/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن شیفت');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Edit(id) {
+            $.ajax({
+                url: "/TimeSheet/TimeSheetEdit/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('ویرایش شیفت');
+                $('#myModalBody').html(result);
+            });
+        }
+
+    </script>
+
+}

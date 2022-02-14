@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_StudentTakeTimeList>
+
+@{
+    ViewBag.Title = "لیست دانشجویان";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Turn")" data-toggle="tooltip" data-placement="auto" title="تایم های کاری">@ViewBag.TurnDisplay</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "TimeSheet", new { id = ViewBag.turnID, turnDisplay = ViewBag.TurnDisplay })" data-toggle="tooltip" data-placement="auto" title="شیفت های کاری">@ViewBag.TimeSheetDisplay</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+    @*<div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+        <a href="@Url.Action("Index", "TimeSheet", new { id = ViewBag.turnID })">
+            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+        </a>
+    </div>*@
+
+    @*<div class="pull-left">
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+    </div>*@
+
+    <div class="pull-right">
+        <a href="@Url.Action("Excel","StudentsTimeSheet", new { id = ViewBag.ID })" data-toggle='tooltip' data-placement='auto' title='خروجی'>
+            <i class="glyphicon glyphicon-cloud-download navigation-btn-icon"></i>
+        </a>
+    </div>
+
+</div>
+
+<div class="panel panel-default">
+
+    <div class="panel-body table-body" style="overflow-x:auto;">
+
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Code)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_National)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Student_Family)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.per)</th>
+                    <th scope="col" data-orderable="false">کنترل</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int x = 0;
+                }
+
+                @foreach (var item in Model)
+                {
+                    x++;
+
+                    <tr>
+                        <td scope="row">@x</td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Student_Code) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Student_National) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Student_Name) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Student_Family) </span>
+                        </td>
+
+                        <td scope="row">
+                            <span>@Html.DisplayFor(modelItem => item.per) </span>
+                        </td>
+
+                        <td scope="row">
+
+                            @if (item.per)
+                            {
+                                <a class="control btn btn-success btn-sm glyphicon glyphicon-user" data-toggle='tooltip' data-placement='auto' title='لغو حضور' href="javascript:void(0)" onclick="Activeness(@item.ID)"></a>
+
+                            }
+                            else
+                            {
+                                <a class="control btn btn-danger btn-sm glyphicon glyphicon-user" data-toggle='tooltip' data-placement='auto' title='ثبت حضور' href="javascript:void(0)" onclick="Activeness(@item.ID)"></a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+@Html.Partial("_Modal")
+
+@section Modal {
+
+    <script>
+        function Activeness(id) {
+            $.ajax({
+                url: "/StudentsTimeSheet/SetActiveness/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('تغییر وضعیت حضور');
+                $('#myModalBody').html(result);
+            });
+        }
+    </script>
+
+}

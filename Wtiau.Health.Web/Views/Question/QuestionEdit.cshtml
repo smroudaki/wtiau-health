@@ -1,0 +1,90 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_QuestionEdit
+@using Wtiau.Health.Web.Models.Repository
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="modal-main">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Step, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.Step, new Rep_SelectItems().Get_AllStep(Model.Form_ID), new { @class = "form-control Select2_Normal" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.Type, Rep_CodeGroup.Get_AllCodesWithGroupWithGUID(CodeGroup.ResponseType), new { @class = "form-control Select2_Normal" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+
+            <div class="input-group">
+                <span class=" input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group material-switch-body">
+            <label class="pull-left">دروغ سنج</label>
+            <div class="material-switch pull-right">
+                @Html.CheckBoxFor(model => model.Lie, htmlAttributes: new { @class = "" })
+                @Html.LabelFor(model => model.Lie, htmlAttributes: new { @class = "label-success" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="">
+        <button class="btn btn-danger modal-btn-Dual pull-left" type="button" data-dismiss="modal">انصراف</button>
+        <button class="btn btn-success modal-btn-Dual pull-right " type="submit" name="btn-Delete">تایید</button>
+    </div>
+}
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script src="~/Scripts/Plugins/jQuery.Select2/select2.js"></script>
+<script src="~/Scripts/Plugins/jQuery.Select2/i18n/fa.js"></script>
+
+<script src="~/Scripts/MyScripts/Select2_Config.js"></script>
+
+@*<script>
+    $(document).ready(function () {
+        $("#Step").select2({
+            theme: "bootstrap",
+            language: "fa",
+            dir: "rtl",
+            tokenSeparators: [',', ' '],
+            minimumResultsForSearch: 6,
+            placeholder: 'انتخاب کنید',
+            ajax: {
+                url: '/Question/Get_StepList/',
+                dataType: "json",
+                data: function (params) {
+                    return {
+                        searchTerm: params.term,
+                        id: @Model.ID,
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        });
+    });
+</script>*@
+
+<script>
+    $(function () {
+        $("input[type='hidden']").remove();
+    });
+</script>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8acb8ac72edd4561af0337a9d30e756b" Name="Diagram1">
+        <EntityTypeShape EntityType="HealthModel.Tbl_Branch" Width="1.5" PointX="7.5" PointY="7.125" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Code" Width="1.5" PointX="7.5" PointY="11.5" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_CodeGroup" Width="1.5" PointX="5.25" PointY="12.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_College" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Course" Width="1.5" PointX="9.75" PointY="2.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Form" Width="1.5" PointX="12" PointY="0.75" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_FormAnswer" Width="1.5" PointX="14.25" PointY="7.25" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_FormAnswerResponse" Width="1.5" PointX="19.5" PointY="7.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_FormStep" Width="1.5" PointX="12.75" PointY="18.125" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Grad" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Group" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Login" Width="1.5" PointX="3" PointY="16.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Question" Width="1.5" PointX="15" PointY="17.875" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Response" Width="1.5" PointX="17.25" PointY="18" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Role" Width="1.5" PointX="0.75" PointY="16.875" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Student" Width="1.5" PointX="12" PointY="6.5" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_StudentHealthInformation" Width="1.5" PointX="14.25" PointY="13.5" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_StudentInfo" Width="1.5" PointX="9.75" PointY="5.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_TakeTurn" Width="1.5" PointX="17.25" PointY="7.25" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_Turn" Width="1.5" PointX="12.75" PointY="22.375" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_TurnTimeSheet" Width="1.5" PointX="15" PointY="22.125" />
+        <EntityTypeShape EntityType="HealthModel.Tbl_University" Width="1.5" PointX="0.75" PointY="7.375" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Branch_Tbl_Grad" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Branch_Tbl_Group" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Branch" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Code_Tbl_CodeGroop" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Question_Tbl_Code" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code1" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code2" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code3" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code4" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code6" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code7" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_College_Tbl_University" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Grad_Tbl_College" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_From_Tbl_Course" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_FormAnswer_Tbl_From" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_FormStep_Tbl_From" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Question_Tbl_Form" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_FormAnswer_Tbl_Student" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_Response" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Question_Tbl_FormStep" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Login_Tbl_Role" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Response_Tbl_Question" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_TakeTurn_Tbl_Student" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" />
+        <AssociationConnector Association="HealthModel.FK_Tbl_TurnTimeSheet_Tbl_Turn" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

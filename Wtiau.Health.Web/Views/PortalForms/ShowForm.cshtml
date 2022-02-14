@@ -1,0 +1,101 @@
+﻿@model Wtiau.Health.Web.Models.ViewModels.Model_Form
+
+@{
+    ViewBag.Title = "فرم";
+    Layout = "~/Views/Shared/_Portal.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="panel panel-default" style="margin: 0 auto;max-width:1000px;">
+
+        <div class="panel-body">
+
+            <div class="text-center">
+                <h3>@Model.Name</h3>
+            </div>
+
+            <hr />
+
+            @{
+                int QN = 0;
+            }
+
+            @foreach (var S in Model.Steps)
+            {
+                <h4>@S.Name</h4>
+
+                int i = 0;
+
+                foreach (var Q in S.Questions)
+                {
+                    i++;
+                    QN++;
+
+                    <p class="form-show-step-question"> @QN.ToString() - @Q.Titel</p>
+
+                    <div class="form-group form-show-step-question-response">
+
+                        @if (Q.type == 3)
+                        {
+                            foreach (var R in Q.Responses)
+                            {
+                                <div>
+                                    <input type="radio" name="@Q.Name " value="@R.Value" required data-msg="باید به سوال @QN جواب داده شود" />
+                                    @R.Text
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var R in Q.Responses)
+                            {
+                                <div>
+                                    <input type="checkbox" name="@Q.Name " value="@R.Value" required data-msg="باید به سوال @QN جواب داده شود" />
+                                    @R.Text
+                                </div>
+                            }
+                        }
+
+                    </div>
+                }
+
+                <br />
+            }
+
+        </div>
+
+        @Html.ValidationSummary(false)
+
+        <div>
+            <button class="btn btn-success btn-block " type="submit" name="btn-Delete">ثبت</button>
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+}
+
+
+@Html.Partial("_Modal")
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "/PortalForms/AlartForm/",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('اطلاعیه');
+                $('#myModalBody').html(result);
+            });
+
+        });
+    </script>
+}

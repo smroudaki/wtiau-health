@@ -1,0 +1,2003 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HealthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Branch">
+          <Key>
+            <PropertyRef Name="Branch_ID" />
+          </Key>
+          <Property Name="Branch_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Branch_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Branch_GroupID" Type="int" />
+          <Property Name="Branch_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Branch_IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Branch_GradeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Code">
+          <Key>
+            <PropertyRef Name="Code_ID" />
+          </Key>
+          <Property Name="Code_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code_CGID" Type="int" Nullable="false" />
+          <Property Name="Code_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Code_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Code_IsActive" Type="bit" Nullable="false" />
+          <Property Name="Code_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_CodeGroup">
+          <Key>
+            <PropertyRef Name="CG_ID" />
+          </Key>
+          <Property Name="CG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CG_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CG_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CG_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CG_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_College">
+          <Key>
+            <PropertyRef Name="College_ID" />
+          </Key>
+          <Property Name="College_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="College_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="College_UniversityID" Type="int" Nullable="false" />
+          <Property Name="College_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="College_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Course">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Course_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Course_Years" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Course_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Course_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Form">
+          <Key>
+            <PropertyRef Name="Form_ID" />
+          </Key>
+          <Property Name="Form_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Form_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Form_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Form_CourseID" Type="int" Nullable="false" />
+          <Property Name="Form_Display" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Form_IsActive" Type="bit" Nullable="false" />
+          <Property Name="Form_CreateDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Form_ModifyDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Form_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_FormAnswer">
+          <Key>
+            <PropertyRef Name="FA_ID" />
+          </Key>
+          <Property Name="FA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FA_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FA_StudentID" Type="int" Nullable="false" />
+          <Property Name="FA_FormID" Type="int" Nullable="false" />
+          <Property Name="FA_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_FormAnswerResponse">
+          <Key>
+            <PropertyRef Name="FAR_ID" />
+          </Key>
+          <Property Name="FAR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FAR_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FAR__FAID" Type="int" Nullable="false" />
+          <Property Name="FAR_ResponseID" Type="int" Nullable="false" />
+          <Property Name="FAR_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_FormStep">
+          <Key>
+            <PropertyRef Name="FS_ID" />
+          </Key>
+          <Property Name="FS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FS_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FS_FormID" Type="int" Nullable="false" />
+          <Property Name="FS_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FS_Order" Type="int" Nullable="false" />
+          <Property Name="FS_Display" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FS_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Grad">
+          <Key>
+            <PropertyRef Name="Grade_ID" />
+          </Key>
+          <Property Name="Grade_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Grade_Display" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Grade_CollageID" Type="int" Nullable="false" />
+          <Property Name="Grade_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Group">
+          <Key>
+            <PropertyRef Name="Group_ID" />
+          </Key>
+          <Property Name="Group_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Group_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Group_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Login">
+          <Key>
+            <PropertyRef Name="Login_ID" />
+          </Key>
+          <Property Name="Login_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Login_RoleID" Type="int" Nullable="false" />
+          <Property Name="Login_Email" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Login_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Login_Family" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Login_PasswordHash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Login_PasswordSalt" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Login_CreateDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Login_Modify" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Login_Mobile" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Login_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Question">
+          <Key>
+            <PropertyRef Name="Question_ID" />
+          </Key>
+          <Property Name="Question_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Question_FSID" Type="int" Nullable="false" />
+          <Property Name="Question_FormID" Type="int" Nullable="false" />
+          <Property Name="Question_Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question_TypeCodeID" Type="int" Nullable="false" />
+          <Property Name="Question_Lie" Type="bit" Nullable="false" />
+          <Property Name="Question_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Response">
+          <Key>
+            <PropertyRef Name="Response_ID" />
+          </Key>
+          <Property Name="Response_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Response_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Response_QuestionID" Type="int" Nullable="false" />
+          <Property Name="Response_Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Response_Hint" Type="int" Nullable="false" />
+          <Property Name="Response_Order" Type="int" Nullable="false" />
+          <Property Name="Response_IsTrue" Type="bit" Nullable="false" />
+          <Property Name="Response_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Role_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Role_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Role_IsDelete" Type="bit" Nullable="false" />
+          <Property Name="Role_Level" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Student">
+          <Key>
+            <PropertyRef Name="Student_ID" />
+          </Key>
+          <Property Name="Student_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Student_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Student_SIID" Type="int" />
+          <Property Name="Student_Code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Student_NationalCode" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Student_Form1" Type="bit" Nullable="false" />
+          <Property Name="Student_Form2" Type="bit" Nullable="false" />
+          <Property Name="Student_TakeTurn" Type="bit" Nullable="false" />
+          <Property Name="Student_Info" Type="bit" Nullable="false" />
+          <Property Name="Student_HealthInfo" Type="bit" Nullable="false" />
+          <Property Name="Student_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_StudentHealthInformation">
+          <Key>
+            <PropertyRef Name="SHI_ID" />
+          </Key>
+          <Property Name="SHI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SHI_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SHI_StudentID" Type="int" Nullable="false" />
+          <Property Name="SHI_Height" Type="float" Nullable="false" />
+          <Property Name="SHI_Weight" Type="float" Nullable="false" />
+          <Property Name="SHI_BloodSuger" Type="float" Nullable="false" />
+          <Property Name="SHI_BloodPressureMin" Type="float" Nullable="false" />
+          <Property Name="SHI_BloodPressureMax" Type="float" Nullable="false" />
+          <Property Name="SHI_BMI" Type="float" Nullable="false" />
+          <Property Name="SHI_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_StudentInfo">
+          <Key>
+            <PropertyRef Name="SI_ID" />
+          </Key>
+          <Property Name="SI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SI_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SI_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SI_Family" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SI_Email" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SI_Phone" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SI_Mobile" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SI_GenderCodeID" Type="int" Nullable="false" />
+          <Property Name="SI_BirthYearCodeID" Type="int" Nullable="false" />
+          <Property Name="SI_NationalCodeID" Type="int" Nullable="false" />
+          <Property Name="SI_BloodCodeID" Type="int" Nullable="false" />
+          <Property Name="SI_InsuranceCodeID" Type="int" Nullable="false" />
+          <Property Name="SI_HomeTypeCodeID" Type="int" Nullable="false" />
+          <Property Name="SI_MarriageCodeID" Type="int" Nullable="false" />
+          <Property Name="SI_BranchID" Type="int" Nullable="false" />
+          <Property Name="SI_BirthdayLocation" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SI_BeforeUniversity" Type="nvarchar(max)" />
+          <Property Name="SI_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TakeTurn">
+          <Key>
+            <PropertyRef Name="TT_ID" />
+          </Key>
+          <Property Name="TT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TT_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TT_StudentID" Type="int" Nullable="false" />
+          <Property Name="TT_TTSID" Type="int" Nullable="false" />
+          <Property Name="TT_IsPresent" Type="bit" Nullable="false" />
+          <Property Name="TT_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Turn">
+          <Key>
+            <PropertyRef Name="Turn_ID" />
+          </Key>
+          <Property Name="Turn_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Turn_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Turn_Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Turn_Description" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Turn_IsActive" Type="bit" Nullable="false" />
+          <Property Name="Turn_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TurnTimeSheet">
+          <Key>
+            <PropertyRef Name="TTS_ID" />
+          </Key>
+          <Property Name="TTS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TTS_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TTS_TurnID" Type="int" Nullable="false" />
+          <Property Name="TTS_Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TTS_MaxSize" Type="int" Nullable="false" />
+          <Property Name="TTS_IsActive" Type="bit" Nullable="false" />
+          <Property Name="TTS_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_University">
+          <Key>
+            <PropertyRef Name="University_ID" />
+          </Key>
+          <Property Name="University_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="University_Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="University_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="University_Display" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="University_IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Tbl_Branch_Tbl_Grad">
+          <End Role="Tbl_Grad" Type="Self.Tbl_Grad" Multiplicity="1" />
+          <End Role="Tbl_Branch" Type="Self.Tbl_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Grad">
+              <PropertyRef Name="Grade_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Branch">
+              <PropertyRef Name="Branch_GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Branch_Tbl_Group">
+          <End Role="Tbl_Group" Type="Self.Tbl_Group" Multiplicity="0..1" />
+          <End Role="Tbl_Branch" Type="Self.Tbl_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Group">
+              <PropertyRef Name="Group_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Branch">
+              <PropertyRef Name="Branch_GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Code_Tbl_CodeGroop">
+          <End Role="Tbl_CodeGroup" Type="Self.Tbl_CodeGroup" Multiplicity="1" />
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_CodeGroup">
+              <PropertyRef Name="CG_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Code">
+              <PropertyRef Name="Code_CGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_College_Tbl_University">
+          <End Role="Tbl_University" Type="Self.Tbl_University" Multiplicity="1" />
+          <End Role="Tbl_College" Type="Self.Tbl_College" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_University">
+              <PropertyRef Name="University_ID" />
+            </Principal>
+            <Dependent Role="Tbl_College">
+              <PropertyRef Name="College_UniversityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswer_Tbl_From">
+          <End Role="Tbl_Form" Type="Self.Tbl_Form" Multiplicity="1" />
+          <End Role="Tbl_FormAnswer" Type="Self.Tbl_FormAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Form">
+              <PropertyRef Name="Form_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswer_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="1" />
+          <End Role="Tbl_FormAnswer" Type="Self.Tbl_FormAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswerResponse_Tbl_FormAnswer">
+          <End Role="Tbl_FormAnswer" Type="Self.Tbl_FormAnswer" Multiplicity="1" />
+          <End Role="Tbl_FormAnswerResponse" Type="Self.Tbl_FormAnswerResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswerResponse">
+              <PropertyRef Name="FAR__FAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswerResponse_Tbl_Response">
+          <End Role="Tbl_Response" Type="Self.Tbl_Response" Multiplicity="1" />
+          <End Role="Tbl_FormAnswerResponse" Type="Self.Tbl_FormAnswerResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Response">
+              <PropertyRef Name="Response_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswerResponse">
+              <PropertyRef Name="FAR_ResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormStep_Tbl_From">
+          <End Role="Tbl_Form" Type="Self.Tbl_Form" Multiplicity="1" />
+          <End Role="Tbl_FormStep" Type="Self.Tbl_FormStep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Form">
+              <PropertyRef Name="Form_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormStep">
+              <PropertyRef Name="FS_FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_From_Tbl_Course">
+          <End Role="Tbl_Course" Type="Self.Tbl_Course" Multiplicity="1" />
+          <End Role="Tbl_Form" Type="Self.Tbl_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Form">
+              <PropertyRef Name="Form_CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Grad_Tbl_College">
+          <End Role="Tbl_College" Type="Self.Tbl_College" Multiplicity="1" />
+          <End Role="Tbl_Grad" Type="Self.Tbl_Grad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_College">
+              <PropertyRef Name="College_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Grad">
+              <PropertyRef Name="Grade_CollageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Login_Tbl_Role">
+          <End Role="Tbl_Role" Type="Self.Tbl_Role" Multiplicity="1" />
+          <End Role="Tbl_Login" Type="Self.Tbl_Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Role">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Login">
+              <PropertyRef Name="Login_RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Question_Tbl_Code">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_Question" Type="Self.Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_TypeCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Question_Tbl_Form">
+          <End Role="Tbl_Form" Type="Self.Tbl_Form" Multiplicity="1" />
+          <End Role="Tbl_Question" Type="Self.Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Form">
+              <PropertyRef Name="Form_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Question_Tbl_FormStep">
+          <End Role="Tbl_FormStep" Type="Self.Tbl_FormStep" Multiplicity="1" />
+          <End Role="Tbl_Question" Type="Self.Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_FormStep">
+              <PropertyRef Name="FS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_FSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Response_Tbl_Question">
+          <End Role="Tbl_Question" Type="Self.Tbl_Question" Multiplicity="1" />
+          <End Role="Tbl_Response" Type="Self.Tbl_Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Question">
+              <PropertyRef Name="Question_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Response">
+              <PropertyRef Name="Response_QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Student_Tbl_StudentInfo">
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="0..1" />
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Student">
+              <PropertyRef Name="Student_SIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentHealthInformation_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="1" />
+          <End Role="Tbl_StudentHealthInformation" Type="Self.Tbl_StudentHealthInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentHealthInformation">
+              <PropertyRef Name="SHI_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Branch">
+          <End Role="Tbl_Branch" Type="Self.Tbl_Branch" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_GenderCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code1">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_BirthYearCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code2">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_NationalCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code3">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_BloodCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code4">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_InsuranceCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code6">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_HomeTypeCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code7">
+          <End Role="Tbl_Code" Type="Self.Tbl_Code" Multiplicity="1" />
+          <End Role="Tbl_StudentInfo" Type="Self.Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_MarriageCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="1" />
+          <End Role="Tbl_TakeTurn" Type="Self.Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+          <End Role="Tbl_TurnTimeSheet" Type="Self.Tbl_TurnTimeSheet" Multiplicity="1" />
+          <End Role="Tbl_TakeTurn" Type="Self.Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_TTSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TurnTimeSheet_Tbl_Turn">
+          <End Role="Tbl_Turn" Type="Self.Tbl_Turn" Multiplicity="1" />
+          <End Role="Tbl_TurnTimeSheet" Type="Self.Tbl_TurnTimeSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Turn">
+              <PropertyRef Name="Turn_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_TurnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="HealthModelStoreContainer">
+          <EntitySet Name="Tbl_Branch" EntityType="Self.Tbl_Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Code" EntityType="Self.Tbl_Code" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CodeGroup" EntityType="Self.Tbl_CodeGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_College" EntityType="Self.Tbl_College" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Course" EntityType="Self.Tbl_Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Form" EntityType="Self.Tbl_Form" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_FormAnswer" EntityType="Self.Tbl_FormAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_FormAnswerResponse" EntityType="Self.Tbl_FormAnswerResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_FormStep" EntityType="Self.Tbl_FormStep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Grad" EntityType="Self.Tbl_Grad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Group" EntityType="Self.Tbl_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Login" EntityType="Self.Tbl_Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Question" EntityType="Self.Tbl_Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Response" EntityType="Self.Tbl_Response" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Role" EntityType="Self.Tbl_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Student" EntityType="Self.Tbl_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_StudentHealthInformation" EntityType="Self.Tbl_StudentHealthInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_StudentInfo" EntityType="Self.Tbl_StudentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_TakeTurn" EntityType="Self.Tbl_TakeTurn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Turn" EntityType="Self.Tbl_Turn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_TurnTimeSheet" EntityType="Self.Tbl_TurnTimeSheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_University" EntityType="Self.Tbl_University" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Branch_Tbl_Grad" Association="Self.FK_Tbl_Branch_Tbl_Grad">
+            <End Role="Tbl_Grad" EntitySet="Tbl_Grad" />
+            <End Role="Tbl_Branch" EntitySet="Tbl_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Branch_Tbl_Group" Association="Self.FK_Tbl_Branch_Tbl_Group">
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+            <End Role="Tbl_Branch" EntitySet="Tbl_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Code_Tbl_CodeGroop" Association="Self.FK_Tbl_Code_Tbl_CodeGroop">
+            <End Role="Tbl_CodeGroup" EntitySet="Tbl_CodeGroup" />
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_College_Tbl_University" Association="Self.FK_Tbl_College_Tbl_University">
+            <End Role="Tbl_University" EntitySet="Tbl_University" />
+            <End Role="Tbl_College" EntitySet="Tbl_College" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswer_Tbl_From" Association="Self.FK_Tbl_FormAnswer_Tbl_From">
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswer_Tbl_Student" Association="Self.FK_Tbl_FormAnswer_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" Association="Self.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer">
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+            <End Role="Tbl_FormAnswerResponse" EntitySet="Tbl_FormAnswerResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswerResponse_Tbl_Response" Association="Self.FK_Tbl_FormAnswerResponse_Tbl_Response">
+            <End Role="Tbl_Response" EntitySet="Tbl_Response" />
+            <End Role="Tbl_FormAnswerResponse" EntitySet="Tbl_FormAnswerResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormStep_Tbl_From" Association="Self.FK_Tbl_FormStep_Tbl_From">
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+            <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_From_Tbl_Course" Association="Self.FK_Tbl_From_Tbl_Course">
+            <End Role="Tbl_Course" EntitySet="Tbl_Course" />
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Grad_Tbl_College" Association="Self.FK_Tbl_Grad_Tbl_College">
+            <End Role="Tbl_College" EntitySet="Tbl_College" />
+            <End Role="Tbl_Grad" EntitySet="Tbl_Grad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Login_Tbl_Role" Association="Self.FK_Tbl_Login_Tbl_Role">
+            <End Role="Tbl_Role" EntitySet="Tbl_Role" />
+            <End Role="Tbl_Login" EntitySet="Tbl_Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_Code" Association="Self.FK_Tbl_Question_Tbl_Code">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_Form" Association="Self.FK_Tbl_Question_Tbl_Form">
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_FormStep" Association="Self.FK_Tbl_Question_Tbl_FormStep">
+            <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Response_Tbl_Question" Association="Self.FK_Tbl_Response_Tbl_Question">
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+            <End Role="Tbl_Response" EntitySet="Tbl_Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Student_Tbl_StudentInfo" Association="Self.FK_Tbl_Student_Tbl_StudentInfo">
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentHealthInformation_Tbl_Student" Association="Self.FK_Tbl_StudentHealthInformation_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_StudentHealthInformation" EntitySet="Tbl_StudentHealthInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Branch" Association="Self.FK_Tbl_StudentInfo_Tbl_Branch">
+            <End Role="Tbl_Branch" EntitySet="Tbl_Branch" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code" Association="Self.FK_Tbl_StudentInfo_Tbl_Code">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code1" Association="Self.FK_Tbl_StudentInfo_Tbl_Code1">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code2" Association="Self.FK_Tbl_StudentInfo_Tbl_Code2">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code3" Association="Self.FK_Tbl_StudentInfo_Tbl_Code3">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code4" Association="Self.FK_Tbl_StudentInfo_Tbl_Code4">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code6" Association="Self.FK_Tbl_StudentInfo_Tbl_Code6">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code7" Association="Self.FK_Tbl_StudentInfo_Tbl_Code7">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_Student" Association="Self.FK_Tbl_TakeTurn_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" Association="Self.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TurnTimeSheet_Tbl_Turn" Association="Self.FK_Tbl_TurnTimeSheet_Tbl_Turn">
+            <End Role="Tbl_Turn" EntitySet="Tbl_Turn" />
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HealthEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(HealthModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(HealthModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Tbl_Branch" EntityType="HealthModel.Tbl_Branch" />
+          <EntitySet Name="Tbl_Code" EntityType="HealthModel.Tbl_Code" />
+          <EntitySet Name="Tbl_CodeGroup" EntityType="HealthModel.Tbl_CodeGroup" />
+          <EntitySet Name="Tbl_College" EntityType="HealthModel.Tbl_College" />
+          <EntitySet Name="Tbl_Course" EntityType="HealthModel.Tbl_Course" />
+          <EntitySet Name="Tbl_Form" EntityType="HealthModel.Tbl_Form" />
+          <EntitySet Name="Tbl_FormAnswer" EntityType="HealthModel.Tbl_FormAnswer" />
+          <EntitySet Name="Tbl_FormAnswerResponse" EntityType="HealthModel.Tbl_FormAnswerResponse" />
+          <EntitySet Name="Tbl_FormStep" EntityType="HealthModel.Tbl_FormStep" />
+          <EntitySet Name="Tbl_Grad" EntityType="HealthModel.Tbl_Grad" />
+          <EntitySet Name="Tbl_Group" EntityType="HealthModel.Tbl_Group" />
+          <EntitySet Name="Tbl_Login" EntityType="HealthModel.Tbl_Login" />
+          <EntitySet Name="Tbl_Question" EntityType="HealthModel.Tbl_Question" />
+          <EntitySet Name="Tbl_Response" EntityType="HealthModel.Tbl_Response" />
+          <EntitySet Name="Tbl_Role" EntityType="HealthModel.Tbl_Role" />
+          <EntitySet Name="Tbl_Student" EntityType="HealthModel.Tbl_Student" />
+          <EntitySet Name="Tbl_StudentHealthInformation" EntityType="HealthModel.Tbl_StudentHealthInformation" />
+          <EntitySet Name="Tbl_StudentInfo" EntityType="HealthModel.Tbl_StudentInfo" />
+          <EntitySet Name="Tbl_TakeTurn" EntityType="HealthModel.Tbl_TakeTurn" />
+          <EntitySet Name="Tbl_Turn" EntityType="HealthModel.Tbl_Turn" />
+          <EntitySet Name="Tbl_TurnTimeSheet" EntityType="HealthModel.Tbl_TurnTimeSheet" />
+          <EntitySet Name="Tbl_University" EntityType="HealthModel.Tbl_University" />
+          <AssociationSet Name="FK_Tbl_Branch_Tbl_Grad" Association="HealthModel.FK_Tbl_Branch_Tbl_Grad">
+            <End Role="Tbl_Grad" EntitySet="Tbl_Grad" />
+            <End Role="Tbl_Branch" EntitySet="Tbl_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Branch_Tbl_Group" Association="HealthModel.FK_Tbl_Branch_Tbl_Group">
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+            <End Role="Tbl_Branch" EntitySet="Tbl_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Branch" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Branch">
+            <End Role="Tbl_Branch" EntitySet="Tbl_Branch" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Code_Tbl_CodeGroop" Association="HealthModel.FK_Tbl_Code_Tbl_CodeGroop">
+            <End Role="Tbl_CodeGroup" EntitySet="Tbl_CodeGroup" />
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_Code" Association="HealthModel.FK_Tbl_Question_Tbl_Code">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code1" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code1">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code2" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code2">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code3" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code3">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code4" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code4">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code6" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code6">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentInfo_Tbl_Code7" Association="HealthModel.FK_Tbl_StudentInfo_Tbl_Code7">
+            <End Role="Tbl_Code" EntitySet="Tbl_Code" />
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_College_Tbl_University" Association="HealthModel.FK_Tbl_College_Tbl_University">
+            <End Role="Tbl_University" EntitySet="Tbl_University" />
+            <End Role="Tbl_College" EntitySet="Tbl_College" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Grad_Tbl_College" Association="HealthModel.FK_Tbl_Grad_Tbl_College">
+            <End Role="Tbl_College" EntitySet="Tbl_College" />
+            <End Role="Tbl_Grad" EntitySet="Tbl_Grad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_From_Tbl_Course" Association="HealthModel.FK_Tbl_From_Tbl_Course">
+            <End Role="Tbl_Course" EntitySet="Tbl_Course" />
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswer_Tbl_From" Association="HealthModel.FK_Tbl_FormAnswer_Tbl_From">
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormStep_Tbl_From" Association="HealthModel.FK_Tbl_FormStep_Tbl_From">
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+            <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_Form" Association="HealthModel.FK_Tbl_Question_Tbl_Form">
+            <End Role="Tbl_Form" EntitySet="Tbl_Form" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswer_Tbl_Student" Association="HealthModel.FK_Tbl_FormAnswer_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" Association="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer">
+            <End Role="Tbl_FormAnswer" EntitySet="Tbl_FormAnswer" />
+            <End Role="Tbl_FormAnswerResponse" EntitySet="Tbl_FormAnswerResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_FormAnswerResponse_Tbl_Response" Association="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_Response">
+            <End Role="Tbl_Response" EntitySet="Tbl_Response" />
+            <End Role="Tbl_FormAnswerResponse" EntitySet="Tbl_FormAnswerResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Question_Tbl_FormStep" Association="HealthModel.FK_Tbl_Question_Tbl_FormStep">
+            <End Role="Tbl_FormStep" EntitySet="Tbl_FormStep" />
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Login_Tbl_Role" Association="HealthModel.FK_Tbl_Login_Tbl_Role">
+            <End Role="Tbl_Role" EntitySet="Tbl_Role" />
+            <End Role="Tbl_Login" EntitySet="Tbl_Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Response_Tbl_Question" Association="HealthModel.FK_Tbl_Response_Tbl_Question">
+            <End Role="Tbl_Question" EntitySet="Tbl_Question" />
+            <End Role="Tbl_Response" EntitySet="Tbl_Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Student_Tbl_StudentInfo" Association="HealthModel.FK_Tbl_Student_Tbl_StudentInfo">
+            <End Role="Tbl_StudentInfo" EntitySet="Tbl_StudentInfo" />
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StudentHealthInformation_Tbl_Student" Association="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_StudentHealthInformation" EntitySet="Tbl_StudentHealthInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_Student" Association="HealthModel.FK_Tbl_TakeTurn_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" Association="HealthModel.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
+            <End Role="Tbl_TakeTurn" EntitySet="Tbl_TakeTurn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_TurnTimeSheet_Tbl_Turn" Association="HealthModel.FK_Tbl_TurnTimeSheet_Tbl_Turn">
+            <End Role="Tbl_Turn" EntitySet="Tbl_Turn" />
+            <End Role="Tbl_TurnTimeSheet" EntitySet="Tbl_TurnTimeSheet" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Tbl_Branch">
+          <Key>
+            <PropertyRef Name="Branch_ID" />
+          </Key>
+          <Property Name="Branch_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Branch_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Branch_GroupID" Type="Int32" />
+          <Property Name="Branch_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Branch_IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Branch_GradeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Grad" Relationship="HealthModel.FK_Tbl_Branch_Tbl_Grad" FromRole="Tbl_Branch" ToRole="Tbl_Grad" />
+          <NavigationProperty Name="Tbl_Group" Relationship="HealthModel.FK_Tbl_Branch_Tbl_Group" FromRole="Tbl_Branch" ToRole="Tbl_Group" />
+          <NavigationProperty Name="Tbl_StudentInfo" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Branch" FromRole="Tbl_Branch" ToRole="Tbl_StudentInfo" />
+        </EntityType>
+        <EntityType Name="Tbl_Code">
+          <Key>
+            <PropertyRef Name="Code_ID" />
+          </Key>
+          <Property Name="Code_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Code_CGID" Type="Int32" Nullable="false" />
+          <Property Name="Code_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Code_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Code_IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Code_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_CodeGroup" Relationship="HealthModel.FK_Tbl_Code_Tbl_CodeGroop" FromRole="Tbl_Code" ToRole="Tbl_CodeGroup" />
+          <NavigationProperty Name="Tbl_Question" Relationship="HealthModel.FK_Tbl_Question_Tbl_Code" FromRole="Tbl_Code" ToRole="Tbl_Question" />
+          <NavigationProperty Name="Tbl_StudentInfo" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code" FromRole="Tbl_Code" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentInfo1" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code1" FromRole="Tbl_Code" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentInfo2" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code2" FromRole="Tbl_Code" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentInfo3" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code3" FromRole="Tbl_Code" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentInfo4" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code4" FromRole="Tbl_Code" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentInfo5" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code6" FromRole="Tbl_Code" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentInfo6" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code7" FromRole="Tbl_Code" ToRole="Tbl_StudentInfo" />
+        </EntityType>
+        <EntityType Name="Tbl_CodeGroup">
+          <Key>
+            <PropertyRef Name="CG_ID" />
+          </Key>
+          <Property Name="CG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CG_Guid" Type="Guid" Nullable="false" />
+          <Property Name="CG_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CG_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CG_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Code" Relationship="HealthModel.FK_Tbl_Code_Tbl_CodeGroop" FromRole="Tbl_CodeGroup" ToRole="Tbl_Code" />
+        </EntityType>
+        <EntityType Name="Tbl_College">
+          <Key>
+            <PropertyRef Name="College_ID" />
+          </Key>
+          <Property Name="College_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="College_Guid" Type="Guid" Nullable="false" />
+          <Property Name="College_UniversityID" Type="Int32" Nullable="false" />
+          <Property Name="College_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="College_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_University" Relationship="HealthModel.FK_Tbl_College_Tbl_University" FromRole="Tbl_College" ToRole="Tbl_University" />
+          <NavigationProperty Name="Tbl_Grad" Relationship="HealthModel.FK_Tbl_Grad_Tbl_College" FromRole="Tbl_College" ToRole="Tbl_Grad" />
+        </EntityType>
+        <EntityType Name="Tbl_Course">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Course_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Course_Years" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Course_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Course_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Form" Relationship="HealthModel.FK_Tbl_From_Tbl_Course" FromRole="Tbl_Course" ToRole="Tbl_Form" />
+        </EntityType>
+        <EntityType Name="Tbl_Form">
+          <Key>
+            <PropertyRef Name="Form_ID" />
+          </Key>
+          <Property Name="Form_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Form_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Form_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Form_CourseID" Type="Int32" Nullable="false" />
+          <Property Name="Form_Display" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Form_IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Form_CreateDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Form_ModifyDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Form_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Course" Relationship="HealthModel.FK_Tbl_From_Tbl_Course" FromRole="Tbl_Form" ToRole="Tbl_Course" />
+          <NavigationProperty Name="Tbl_FormAnswer" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_From" FromRole="Tbl_Form" ToRole="Tbl_FormAnswer" />
+          <NavigationProperty Name="Tbl_FormStep" Relationship="HealthModel.FK_Tbl_FormStep_Tbl_From" FromRole="Tbl_Form" ToRole="Tbl_FormStep" />
+          <NavigationProperty Name="Tbl_Question" Relationship="HealthModel.FK_Tbl_Question_Tbl_Form" FromRole="Tbl_Form" ToRole="Tbl_Question" />
+        </EntityType>
+        <EntityType Name="Tbl_FormAnswer">
+          <Key>
+            <PropertyRef Name="FA_ID" />
+          </Key>
+          <Property Name="FA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FA_Guid" Type="Guid" Nullable="false" />
+          <Property Name="FA_StudentID" Type="Int32" Nullable="false" />
+          <Property Name="FA_FormID" Type="Int32" Nullable="false" />
+          <Property Name="FA_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Form" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_From" FromRole="Tbl_FormAnswer" ToRole="Tbl_Form" />
+          <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_Student" FromRole="Tbl_FormAnswer" ToRole="Tbl_Student" />
+          <NavigationProperty Name="Tbl_FormAnswerResponse" Relationship="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" FromRole="Tbl_FormAnswer" ToRole="Tbl_FormAnswerResponse" />
+        </EntityType>
+        <EntityType Name="Tbl_FormAnswerResponse">
+          <Key>
+            <PropertyRef Name="FAR_ID" />
+          </Key>
+          <Property Name="FAR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FAR_Guid" Type="Guid" Nullable="false" />
+          <Property Name="FAR__FAID" Type="Int32" Nullable="false" />
+          <Property Name="FAR_ResponseID" Type="Int32" Nullable="false" />
+          <Property Name="FAR_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_FormAnswer" Relationship="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_FormAnswer" FromRole="Tbl_FormAnswerResponse" ToRole="Tbl_FormAnswer" />
+          <NavigationProperty Name="Tbl_Response" Relationship="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_Response" FromRole="Tbl_FormAnswerResponse" ToRole="Tbl_Response" />
+        </EntityType>
+        <EntityType Name="Tbl_FormStep">
+          <Key>
+            <PropertyRef Name="FS_ID" />
+          </Key>
+          <Property Name="FS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FS_Guid" Type="Guid" Nullable="false" />
+          <Property Name="FS_FormID" Type="Int32" Nullable="false" />
+          <Property Name="FS_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FS_Order" Type="Int32" Nullable="false" />
+          <Property Name="FS_Display" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FS_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Form" Relationship="HealthModel.FK_Tbl_FormStep_Tbl_From" FromRole="Tbl_FormStep" ToRole="Tbl_Form" />
+          <NavigationProperty Name="Tbl_Question" Relationship="HealthModel.FK_Tbl_Question_Tbl_FormStep" FromRole="Tbl_FormStep" ToRole="Tbl_Question" />
+        </EntityType>
+        <EntityType Name="Tbl_Grad">
+          <Key>
+            <PropertyRef Name="Grade_ID" />
+          </Key>
+          <Property Name="Grade_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grade_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Grade_Display" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Grade_CollageID" Type="Int32" Nullable="false" />
+          <Property Name="Grade_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Branch" Relationship="HealthModel.FK_Tbl_Branch_Tbl_Grad" FromRole="Tbl_Grad" ToRole="Tbl_Branch" />
+          <NavigationProperty Name="Tbl_College" Relationship="HealthModel.FK_Tbl_Grad_Tbl_College" FromRole="Tbl_Grad" ToRole="Tbl_College" />
+        </EntityType>
+        <EntityType Name="Tbl_Group">
+          <Key>
+            <PropertyRef Name="Group_ID" />
+          </Key>
+          <Property Name="Group_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Group_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Group_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Branch" Relationship="HealthModel.FK_Tbl_Branch_Tbl_Group" FromRole="Tbl_Group" ToRole="Tbl_Branch" />
+        </EntityType>
+        <EntityType Name="Tbl_Login">
+          <Key>
+            <PropertyRef Name="Login_ID" />
+          </Key>
+          <Property Name="Login_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Login_RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Login_Email" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Login_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Login_Family" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Login_PasswordHash" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login_PasswordSalt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login_CreateDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Login_Modify" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Login_Mobile" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Login_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Role" Relationship="HealthModel.FK_Tbl_Login_Tbl_Role" FromRole="Tbl_Login" ToRole="Tbl_Role" />
+        </EntityType>
+        <EntityType Name="Tbl_Question">
+          <Key>
+            <PropertyRef Name="Question_ID" />
+          </Key>
+          <Property Name="Question_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Question_FSID" Type="Int32" Nullable="false" />
+          <Property Name="Question_FormID" Type="Int32" Nullable="false" />
+          <Property Name="Question_Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Question_TypeCodeID" Type="Int32" Nullable="false" />
+          <Property Name="Question_Lie" Type="Boolean" Nullable="false" />
+          <Property Name="Question_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Code" Relationship="HealthModel.FK_Tbl_Question_Tbl_Code" FromRole="Tbl_Question" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Form" Relationship="HealthModel.FK_Tbl_Question_Tbl_Form" FromRole="Tbl_Question" ToRole="Tbl_Form" />
+          <NavigationProperty Name="Tbl_FormStep" Relationship="HealthModel.FK_Tbl_Question_Tbl_FormStep" FromRole="Tbl_Question" ToRole="Tbl_FormStep" />
+          <NavigationProperty Name="Tbl_Response" Relationship="HealthModel.FK_Tbl_Response_Tbl_Question" FromRole="Tbl_Question" ToRole="Tbl_Response" />
+        </EntityType>
+        <EntityType Name="Tbl_Response">
+          <Key>
+            <PropertyRef Name="Response_ID" />
+          </Key>
+          <Property Name="Response_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Response_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Response_QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="Response_Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Response_Hint" Type="Int32" Nullable="false" />
+          <Property Name="Response_Order" Type="Int32" Nullable="false" />
+          <Property Name="Response_IsTrue" Type="Boolean" Nullable="false" />
+          <Property Name="Response_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_FormAnswerResponse" Relationship="HealthModel.FK_Tbl_FormAnswerResponse_Tbl_Response" FromRole="Tbl_Response" ToRole="Tbl_FormAnswerResponse" />
+          <NavigationProperty Name="Tbl_Question" Relationship="HealthModel.FK_Tbl_Response_Tbl_Question" FromRole="Tbl_Response" ToRole="Tbl_Question" />
+        </EntityType>
+        <EntityType Name="Tbl_Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Role_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Role_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Role_IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Role_Level" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Login" Relationship="HealthModel.FK_Tbl_Login_Tbl_Role" FromRole="Tbl_Role" ToRole="Tbl_Login" />
+        </EntityType>
+        <EntityType Name="Tbl_Student">
+          <Key>
+            <PropertyRef Name="Student_ID" />
+          </Key>
+          <Property Name="Student_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Student_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Student_SIID" Type="Int32" />
+          <Property Name="Student_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Student_NationalCode" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Student_Form1" Type="Boolean" Nullable="false" />
+          <Property Name="Student_Form2" Type="Boolean" Nullable="false" />
+          <Property Name="Student_TakeTurn" Type="Boolean" Nullable="false" />
+          <Property Name="Student_Info" Type="Boolean" Nullable="false" />
+          <Property Name="Student_HealthInfo" Type="Boolean" Nullable="false" />
+          <Property Name="Student_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_FormAnswer" Relationship="HealthModel.FK_Tbl_FormAnswer_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_FormAnswer" />
+          <NavigationProperty Name="Tbl_StudentInfo" Relationship="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" FromRole="Tbl_Student" ToRole="Tbl_StudentInfo" />
+          <NavigationProperty Name="Tbl_StudentHealthInformation" Relationship="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_StudentHealthInformation" />
+          <NavigationProperty Name="Tbl_TakeTurn" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_TakeTurn" />
+        </EntityType>
+        <EntityType Name="Tbl_StudentHealthInformation">
+          <Key>
+            <PropertyRef Name="SHI_ID" />
+          </Key>
+          <Property Name="SHI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SHI_Guid" Type="Guid" Nullable="false" />
+          <Property Name="SHI_StudentID" Type="Int32" Nullable="false" />
+          <Property Name="SHI_Height" Type="Double" Nullable="false" />
+          <Property Name="SHI_Weight" Type="Double" Nullable="false" />
+          <Property Name="SHI_BloodSuger" Type="Double" Nullable="false" />
+          <Property Name="SHI_BloodPressureMin" Type="Double" Nullable="false" />
+          <Property Name="SHI_BloodPressureMax" Type="Double" Nullable="false" />
+          <Property Name="SHI_BMI" Type="Double" Nullable="false" />
+          <Property Name="SHI_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_StudentHealthInformation_Tbl_Student" FromRole="Tbl_StudentHealthInformation" ToRole="Tbl_Student" />
+        </EntityType>
+        <EntityType Name="Tbl_StudentInfo">
+          <Key>
+            <PropertyRef Name="SI_ID" />
+          </Key>
+          <Property Name="SI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SI_Guid" Type="Guid" Nullable="false" />
+          <Property Name="SI_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SI_Family" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SI_Email" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SI_Phone" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SI_Mobile" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SI_GenderCodeID" Type="Int32" Nullable="false" />
+          <Property Name="SI_BirthYearCodeID" Type="Int32" Nullable="false" />
+          <Property Name="SI_NationalCodeID" Type="Int32" Nullable="false" />
+          <Property Name="SI_BloodCodeID" Type="Int32" Nullable="false" />
+          <Property Name="SI_InsuranceCodeID" Type="Int32" Nullable="false" />
+          <Property Name="SI_HomeTypeCodeID" Type="Int32" Nullable="false" />
+          <Property Name="SI_MarriageCodeID" Type="Int32" Nullable="false" />
+          <Property Name="SI_BranchID" Type="Int32" Nullable="false" />
+          <Property Name="SI_BirthdayLocation" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SI_BeforeUniversity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SI_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Branch" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Branch" FromRole="Tbl_StudentInfo" ToRole="Tbl_Branch" />
+          <NavigationProperty Name="Tbl_Code" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Code1" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code1" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Code2" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code2" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Code3" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code3" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Code4" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code4" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Code5" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code6" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Code6" Relationship="HealthModel.FK_Tbl_StudentInfo_Tbl_Code7" FromRole="Tbl_StudentInfo" ToRole="Tbl_Code" />
+          <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_Student_Tbl_StudentInfo" FromRole="Tbl_StudentInfo" ToRole="Tbl_Student" />
+        </EntityType>
+        <EntityType Name="Tbl_TakeTurn">
+          <Key>
+            <PropertyRef Name="TT_ID" />
+          </Key>
+          <Property Name="TT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TT_Guid" Type="Guid" Nullable="false" />
+          <Property Name="TT_StudentID" Type="Int32" Nullable="false" />
+          <Property Name="TT_TTSID" Type="Int32" Nullable="false" />
+          <Property Name="TT_IsPresent" Type="Boolean" Nullable="false" />
+          <Property Name="TT_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Student" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_Student" FromRole="Tbl_TakeTurn" ToRole="Tbl_Student" />
+          <NavigationProperty Name="Tbl_TurnTimeSheet" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" FromRole="Tbl_TakeTurn" ToRole="Tbl_TurnTimeSheet" />
+        </EntityType>
+        <EntityType Name="Tbl_Turn">
+          <Key>
+            <PropertyRef Name="Turn_ID" />
+          </Key>
+          <Property Name="Turn_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Turn_Guid" Type="Guid" Nullable="false" />
+          <Property Name="Turn_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Turn_Description" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Turn_IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Turn_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_TurnTimeSheet" Relationship="HealthModel.FK_Tbl_TurnTimeSheet_Tbl_Turn" FromRole="Tbl_Turn" ToRole="Tbl_TurnTimeSheet" />
+        </EntityType>
+        <EntityType Name="Tbl_TurnTimeSheet">
+          <Key>
+            <PropertyRef Name="TTS_ID" />
+          </Key>
+          <Property Name="TTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TTS_Guid" Type="Guid" Nullable="false" />
+          <Property Name="TTS_TurnID" Type="Int32" Nullable="false" />
+          <Property Name="TTS_Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TTS_MaxSize" Type="Int32" Nullable="false" />
+          <Property Name="TTS_IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="TTS_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_TakeTurn" Relationship="HealthModel.FK_Tbl_TakeTurn_Tbl_TurnTimeSheet" FromRole="Tbl_TurnTimeSheet" ToRole="Tbl_TakeTurn" />
+          <NavigationProperty Name="Tbl_Turn" Relationship="HealthModel.FK_Tbl_TurnTimeSheet_Tbl_Turn" FromRole="Tbl_TurnTimeSheet" ToRole="Tbl_Turn" />
+        </EntityType>
+        <EntityType Name="Tbl_University">
+          <Key>
+            <PropertyRef Name="University_ID" />
+          </Key>
+          <Property Name="University_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="University_Guid" Type="Guid" Nullable="false" />
+          <Property Name="University_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="University_Display" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="University_IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_College" Relationship="HealthModel.FK_Tbl_College_Tbl_University" FromRole="Tbl_University" ToRole="Tbl_College" />
+        </EntityType>
+        <Association Name="FK_Tbl_Branch_Tbl_Grad">
+          <End Type="HealthModel.Tbl_Grad" Role="Tbl_Grad" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Branch" Role="Tbl_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Grad">
+              <PropertyRef Name="Grade_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Branch">
+              <PropertyRef Name="Branch_GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Branch_Tbl_Group">
+          <End Type="HealthModel.Tbl_Group" Role="Tbl_Group" Multiplicity="0..1" />
+          <End Type="HealthModel.Tbl_Branch" Role="Tbl_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Group">
+              <PropertyRef Name="Group_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Branch">
+              <PropertyRef Name="Branch_GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Branch">
+          <End Type="HealthModel.Tbl_Branch" Role="Tbl_Branch" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Branch">
+              <PropertyRef Name="Branch_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Code_Tbl_CodeGroop">
+          <End Type="HealthModel.Tbl_CodeGroup" Role="Tbl_CodeGroup" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_CodeGroup">
+              <PropertyRef Name="CG_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Code">
+              <PropertyRef Name="Code_CGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Question_Tbl_Code">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Question" Role="Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_TypeCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_GenderCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code1">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_BirthYearCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code2">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_NationalCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code3">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_BloodCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code4">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_InsuranceCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code6">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_HomeTypeCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentInfo_Tbl_Code7">
+          <End Type="HealthModel.Tbl_Code" Role="Tbl_Code" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Code">
+              <PropertyRef Name="Code_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_MarriageCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_College_Tbl_University">
+          <End Type="HealthModel.Tbl_University" Role="Tbl_University" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_College" Role="Tbl_College" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_University">
+              <PropertyRef Name="University_ID" />
+            </Principal>
+            <Dependent Role="Tbl_College">
+              <PropertyRef Name="College_UniversityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Grad_Tbl_College">
+          <End Type="HealthModel.Tbl_College" Role="Tbl_College" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Grad" Role="Tbl_Grad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_College">
+              <PropertyRef Name="College_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Grad">
+              <PropertyRef Name="Grade_CollageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_From_Tbl_Course">
+          <End Type="HealthModel.Tbl_Course" Role="Tbl_Course" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Form" Role="Tbl_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Form">
+              <PropertyRef Name="Form_CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswer_Tbl_From">
+          <End Type="HealthModel.Tbl_Form" Role="Tbl_Form" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_FormAnswer" Role="Tbl_FormAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Form">
+              <PropertyRef Name="Form_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormStep_Tbl_From">
+          <End Type="HealthModel.Tbl_Form" Role="Tbl_Form" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_FormStep" Role="Tbl_FormStep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Form">
+              <PropertyRef Name="Form_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormStep">
+              <PropertyRef Name="FS_FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Question_Tbl_Form">
+          <End Type="HealthModel.Tbl_Form" Role="Tbl_Form" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Question" Role="Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Form">
+              <PropertyRef Name="Form_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswer_Tbl_Student">
+          <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_FormAnswer" Role="Tbl_FormAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswerResponse_Tbl_FormAnswer">
+          <End Type="HealthModel.Tbl_FormAnswer" Role="Tbl_FormAnswer" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_FormAnswerResponse" Role="Tbl_FormAnswerResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_FormAnswer">
+              <PropertyRef Name="FA_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswerResponse">
+              <PropertyRef Name="FAR__FAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_FormAnswerResponse_Tbl_Response">
+          <End Type="HealthModel.Tbl_Response" Role="Tbl_Response" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_FormAnswerResponse" Role="Tbl_FormAnswerResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Response">
+              <PropertyRef Name="Response_ID" />
+            </Principal>
+            <Dependent Role="Tbl_FormAnswerResponse">
+              <PropertyRef Name="FAR_ResponseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Question_Tbl_FormStep">
+          <End Type="HealthModel.Tbl_FormStep" Role="Tbl_FormStep" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Question" Role="Tbl_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_FormStep">
+              <PropertyRef Name="FS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Question">
+              <PropertyRef Name="Question_FSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Login_Tbl_Role">
+          <End Type="HealthModel.Tbl_Role" Role="Tbl_Role" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Login" Role="Tbl_Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Role">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Login">
+              <PropertyRef Name="Login_RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Response_Tbl_Question">
+          <End Type="HealthModel.Tbl_Question" Role="Tbl_Question" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_Response" Role="Tbl_Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Question">
+              <PropertyRef Name="Question_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Response">
+              <PropertyRef Name="Response_QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Student_Tbl_StudentInfo">
+          <End Type="HealthModel.Tbl_StudentInfo" Role="Tbl_StudentInfo" Multiplicity="0..1" />
+          <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_StudentInfo">
+              <PropertyRef Name="SI_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Student">
+              <PropertyRef Name="Student_SIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StudentHealthInformation_Tbl_Student">
+          <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_StudentHealthInformation" Role="Tbl_StudentHealthInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_StudentHealthInformation">
+              <PropertyRef Name="SHI_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_Student">
+          <End Type="HealthModel.Tbl_Student" Role="Tbl_Student" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_TakeTurn" Role="Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TakeTurn_Tbl_TurnTimeSheet">
+          <End Type="HealthModel.Tbl_TurnTimeSheet" Role="Tbl_TurnTimeSheet" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_TakeTurn" Role="Tbl_TakeTurn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TakeTurn">
+              <PropertyRef Name="TT_TTSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_TurnTimeSheet_Tbl_Turn">
+          <End Type="HealthModel.Tbl_Turn" Role="Tbl_Turn" Multiplicity="1" />
+          <End Type="HealthModel.Tbl_TurnTimeSheet" Role="Tbl_TurnTimeSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Turn">
+              <PropertyRef Name="Turn_ID" />
+            </Principal>
+            <Dependent Role="Tbl_TurnTimeSheet">
+              <PropertyRef Name="TTS_TurnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthModelStoreContainer" CdmEntityContainer="HealthEntities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="HealthModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="HealthModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="HealthModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="HealthModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="HealthModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="HealthModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="HealthModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Tbl_Branch">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Branch">
+              <MappingFragment StoreEntitySet="Tbl_Branch">
+                <ScalarProperty Name="Branch_GradeID" ColumnName="Branch_GradeID" />
+                <ScalarProperty Name="Branch_IsDelete" ColumnName="Branch_IsDelete" />
+                <ScalarProperty Name="Branch_Display" ColumnName="Branch_Display" />
+                <ScalarProperty Name="Branch_GroupID" ColumnName="Branch_GroupID" />
+                <ScalarProperty Name="Branch_Guid" ColumnName="Branch_Guid" />
+                <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Code">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Code">
+              <MappingFragment StoreEntitySet="Tbl_Code">
+                <ScalarProperty Name="Code_IsDelete" ColumnName="Code_IsDelete" />
+                <ScalarProperty Name="Code_IsActive" ColumnName="Code_IsActive" />
+                <ScalarProperty Name="Code_Display" ColumnName="Code_Display" />
+                <ScalarProperty Name="Code_Name" ColumnName="Code_Name" />
+                <ScalarProperty Name="Code_CGID" ColumnName="Code_CGID" />
+                <ScalarProperty Name="Code_Guid" ColumnName="Code_Guid" />
+                <ScalarProperty Name="Code_ID" ColumnName="Code_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CodeGroup">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_CodeGroup">
+              <MappingFragment StoreEntitySet="Tbl_CodeGroup">
+                <ScalarProperty Name="CG_IsDelete" ColumnName="CG_IsDelete" />
+                <ScalarProperty Name="CG_Display" ColumnName="CG_Display" />
+                <ScalarProperty Name="CG_Name" ColumnName="CG_Name" />
+                <ScalarProperty Name="CG_Guid" ColumnName="CG_Guid" />
+                <ScalarProperty Name="CG_ID" ColumnName="CG_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_College">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_College">
+              <MappingFragment StoreEntitySet="Tbl_College">
+                <ScalarProperty Name="College_IsDelete" ColumnName="College_IsDelete" />
+                <ScalarProperty Name="College_Display" ColumnName="College_Display" />
+                <ScalarProperty Name="College_UniversityID" ColumnName="College_UniversityID" />
+                <ScalarProperty Name="College_Guid" ColumnName="College_Guid" />
+                <ScalarProperty Name="College_ID" ColumnName="College_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Course">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Course">
+              <MappingFragment StoreEntitySet="Tbl_Course">
+                <ScalarProperty Name="Course_IsDelete" ColumnName="Course_IsDelete" />
+                <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
+                <ScalarProperty Name="Course_Years" ColumnName="Course_Years" />
+                <ScalarProperty Name="Course_Guid" ColumnName="Course_Guid" />
+                <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Form">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Form">
+              <MappingFragment StoreEntitySet="Tbl_Form">
+                <ScalarProperty Name="Form_IsDelete" ColumnName="Form_IsDelete" />
+                <ScalarProperty Name="Form_ModifyDate" ColumnName="Form_ModifyDate" />
+                <ScalarProperty Name="Form_CreateDate" ColumnName="Form_CreateDate" />
+                <ScalarProperty Name="Form_IsActive" ColumnName="Form_IsActive" />
+                <ScalarProperty Name="Form_Display" ColumnName="Form_Display" />
+                <ScalarProperty Name="Form_CourseID" ColumnName="Form_CourseID" />
+                <ScalarProperty Name="Form_Name" ColumnName="Form_Name" />
+                <ScalarProperty Name="Form_Guid" ColumnName="Form_Guid" />
+                <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_FormAnswer">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_FormAnswer">
+              <MappingFragment StoreEntitySet="Tbl_FormAnswer">
+                <ScalarProperty Name="FA_IsDelete" ColumnName="FA_IsDelete" />
+                <ScalarProperty Name="FA_FormID" ColumnName="FA_FormID" />
+                <ScalarProperty Name="FA_StudentID" ColumnName="FA_StudentID" />
+                <ScalarProperty Name="FA_Guid" ColumnName="FA_Guid" />
+                <ScalarProperty Name="FA_ID" ColumnName="FA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_FormAnswerResponse">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_FormAnswerResponse">
+              <MappingFragment StoreEntitySet="Tbl_FormAnswerResponse">
+                <ScalarProperty Name="FAR_IsDelete" ColumnName="FAR_IsDelete" />
+                <ScalarProperty Name="FAR_ResponseID" ColumnName="FAR_ResponseID" />
+                <ScalarProperty Name="FAR__FAID" ColumnName="FAR__FAID" />
+                <ScalarProperty Name="FAR_Guid" ColumnName="FAR_Guid" />
+                <ScalarProperty Name="FAR_ID" ColumnName="FAR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_FormStep">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_FormStep">
+              <MappingFragment StoreEntitySet="Tbl_FormStep">
+                <ScalarProperty Name="FS_IsDelete" ColumnName="FS_IsDelete" />
+                <ScalarProperty Name="FS_Display" ColumnName="FS_Display" />
+                <ScalarProperty Name="FS_Order" ColumnName="FS_Order" />
+                <ScalarProperty Name="FS_Name" ColumnName="FS_Name" />
+                <ScalarProperty Name="FS_FormID" ColumnName="FS_FormID" />
+                <ScalarProperty Name="FS_Guid" ColumnName="FS_Guid" />
+                <ScalarProperty Name="FS_ID" ColumnName="FS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Grad">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Grad">
+              <MappingFragment StoreEntitySet="Tbl_Grad">
+                <ScalarProperty Name="Grade_IsDelete" ColumnName="Grade_IsDelete" />
+                <ScalarProperty Name="Grade_CollageID" ColumnName="Grade_CollageID" />
+                <ScalarProperty Name="Grade_Display" ColumnName="Grade_Display" />
+                <ScalarProperty Name="Grade_Guid" ColumnName="Grade_Guid" />
+                <ScalarProperty Name="Grade_ID" ColumnName="Grade_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Group">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Group">
+              <MappingFragment StoreEntitySet="Tbl_Group">
+                <ScalarProperty Name="Group_IsDelete" ColumnName="Group_IsDelete" />
+                <ScalarProperty Name="Group_Display" ColumnName="Group_Display" />
+                <ScalarProperty Name="Group_Guid" ColumnName="Group_Guid" />
+                <ScalarProperty Name="Group_ID" ColumnName="Group_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Login">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Login">
+              <MappingFragment StoreEntitySet="Tbl_Login">
+                <ScalarProperty Name="Login_IsDelete" ColumnName="Login_IsDelete" />
+                <ScalarProperty Name="Login_Mobile" ColumnName="Login_Mobile" />
+                <ScalarProperty Name="Login_Modify" ColumnName="Login_Modify" />
+                <ScalarProperty Name="Login_CreateDate" ColumnName="Login_CreateDate" />
+                <ScalarProperty Name="Login_PasswordSalt" ColumnName="Login_PasswordSalt" />
+                <ScalarProperty Name="Login_PasswordHash" ColumnName="Login_PasswordHash" />
+                <ScalarProperty Name="Login_Family" ColumnName="Login_Family" />
+                <ScalarProperty Name="Login_Name" ColumnName="Login_Name" />
+                <ScalarProperty Name="Login_Email" ColumnName="Login_Email" />
+                <ScalarProperty Name="Login_RoleID" ColumnName="Login_RoleID" />
+                <ScalarProperty Name="Login_Guid" ColumnName="Login_Guid" />
+                <ScalarProperty Name="Login_ID" ColumnName="Login_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Question">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Question">
+              <MappingFragment StoreEntitySet="Tbl_Question">
+                <ScalarProperty Name="Question_IsDelete" ColumnName="Question_IsDelete" />
+                <ScalarProperty Name="Question_Lie" ColumnName="Question_Lie" />
+                <ScalarProperty Name="Question_TypeCodeID" ColumnName="Question_TypeCodeID" />
+                <ScalarProperty Name="Question_Title" ColumnName="Question_Title" />
+                <ScalarProperty Name="Question_FormID" ColumnName="Question_FormID" />
+                <ScalarProperty Name="Question_FSID" ColumnName="Question_FSID" />
+                <ScalarProperty Name="Question_Guid" ColumnName="Question_Guid" />
+                <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Response">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Response">
+              <MappingFragment StoreEntitySet="Tbl_Response">
+                <ScalarProperty Name="Response_IsDelete" ColumnName="Response_IsDelete" />
+                <ScalarProperty Name="Response_IsTrue" ColumnName="Response_IsTrue" />
+                <ScalarProperty Name="Response_Order" ColumnName="Response_Order" />
+                <ScalarProperty Name="Response_Hint" ColumnName="Response_Hint" />
+                <ScalarProperty Name="Response_Title" ColumnName="Response_Title" />
+                <ScalarProperty Name="Response_QuestionID" ColumnName="Response_QuestionID" />
+                <ScalarProperty Name="Response_Guid" ColumnName="Response_Guid" />
+                <ScalarProperty Name="Response_ID" ColumnName="Response_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Role">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Role">
+              <MappingFragment StoreEntitySet="Tbl_Role">
+                <ScalarProperty Name="Role_Level" ColumnName="Role_Level" />
+                <ScalarProperty Name="Role_IsDelete" ColumnName="Role_IsDelete" />
+                <ScalarProperty Name="Role_Display" ColumnName="Role_Display" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+                <ScalarProperty Name="Role_Guid" ColumnName="Role_Guid" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Student">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Student">
+              <MappingFragment StoreEntitySet="Tbl_Student">
+                <ScalarProperty Name="Student_IsDelete" ColumnName="Student_IsDelete" />
+                <ScalarProperty Name="Student_HealthInfo" ColumnName="Student_HealthInfo" />
+                <ScalarProperty Name="Student_Info" ColumnName="Student_Info" />
+                <ScalarProperty Name="Student_TakeTurn" ColumnName="Student_TakeTurn" />
+                <ScalarProperty Name="Student_Form2" ColumnName="Student_Form2" />
+                <ScalarProperty Name="Student_Form1" ColumnName="Student_Form1" />
+                <ScalarProperty Name="Student_NationalCode" ColumnName="Student_NationalCode" />
+                <ScalarProperty Name="Student_Code" ColumnName="Student_Code" />
+                <ScalarProperty Name="Student_SIID" ColumnName="Student_SIID" />
+                <ScalarProperty Name="Student_Guid" ColumnName="Student_Guid" />
+                <ScalarProperty Name="Student_ID" ColumnName="Student_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_StudentHealthInformation">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_StudentHealthInformation">
+              <MappingFragment StoreEntitySet="Tbl_StudentHealthInformation">
+                <ScalarProperty Name="SHI_IsDelete" ColumnName="SHI_IsDelete" />
+                <ScalarProperty Name="SHI_BMI" ColumnName="SHI_BMI" />
+                <ScalarProperty Name="SHI_BloodPressureMax" ColumnName="SHI_BloodPressureMax" />
+                <ScalarProperty Name="SHI_BloodPressureMin" ColumnName="SHI_BloodPressureMin" />
+                <ScalarProperty Name="SHI_BloodSuger" ColumnName="SHI_BloodSuger" />
+                <ScalarProperty Name="SHI_Weight" ColumnName="SHI_Weight" />
+                <ScalarProperty Name="SHI_Height" ColumnName="SHI_Height" />
+                <ScalarProperty Name="SHI_StudentID" ColumnName="SHI_StudentID" />
+                <ScalarProperty Name="SHI_Guid" ColumnName="SHI_Guid" />
+                <ScalarProperty Name="SHI_ID" ColumnName="SHI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_StudentInfo">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_StudentInfo">
+              <MappingFragment StoreEntitySet="Tbl_StudentInfo">
+                <ScalarProperty Name="SI_IsDelete" ColumnName="SI_IsDelete" />
+                <ScalarProperty Name="SI_BeforeUniversity" ColumnName="SI_BeforeUniversity" />
+                <ScalarProperty Name="SI_BirthdayLocation" ColumnName="SI_BirthdayLocation" />
+                <ScalarProperty Name="SI_BranchID" ColumnName="SI_BranchID" />
+                <ScalarProperty Name="SI_MarriageCodeID" ColumnName="SI_MarriageCodeID" />
+                <ScalarProperty Name="SI_HomeTypeCodeID" ColumnName="SI_HomeTypeCodeID" />
+                <ScalarProperty Name="SI_InsuranceCodeID" ColumnName="SI_InsuranceCodeID" />
+                <ScalarProperty Name="SI_BloodCodeID" ColumnName="SI_BloodCodeID" />
+                <ScalarProperty Name="SI_NationalCodeID" ColumnName="SI_NationalCodeID" />
+                <ScalarProperty Name="SI_BirthYearCodeID" ColumnName="SI_BirthYearCodeID" />
+                <ScalarProperty Name="SI_GenderCodeID" ColumnName="SI_GenderCodeID" />
+                <ScalarProperty Name="SI_Mobile" ColumnName="SI_Mobile" />
+                <ScalarProperty Name="SI_Phone" ColumnName="SI_Phone" />
+                <ScalarProperty Name="SI_Email" ColumnName="SI_Email" />
+                <ScalarProperty Name="SI_Family" ColumnName="SI_Family" />
+                <ScalarProperty Name="SI_Name" ColumnName="SI_Name" />
+                <ScalarProperty Name="SI_Guid" ColumnName="SI_Guid" />
+                <ScalarProperty Name="SI_ID" ColumnName="SI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_TakeTurn">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_TakeTurn">
+              <MappingFragment StoreEntitySet="Tbl_TakeTurn">
+                <ScalarProperty Name="TT_IsDelete" ColumnName="TT_IsDelete" />
+                <ScalarProperty Name="TT_IsPresent" ColumnName="TT_IsPresent" />
+                <ScalarProperty Name="TT_TTSID" ColumnName="TT_TTSID" />
+                <ScalarProperty Name="TT_StudentID" ColumnName="TT_StudentID" />
+                <ScalarProperty Name="TT_Guid" ColumnName="TT_Guid" />
+                <ScalarProperty Name="TT_ID" ColumnName="TT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Turn">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_Turn">
+              <MappingFragment StoreEntitySet="Tbl_Turn">
+                <ScalarProperty Name="Turn_IsDelete" ColumnName="Turn_IsDelete" />
+                <ScalarProperty Name="Turn_IsActive" ColumnName="Turn_IsActive" />
+                <ScalarProperty Name="Turn_Description" ColumnName="Turn_Description" />
+                <ScalarProperty Name="Turn_Name" ColumnName="Turn_Name" />
+                <ScalarProperty Name="Turn_Guid" ColumnName="Turn_Guid" />
+                <ScalarProperty Name="Turn_ID" ColumnName="Turn_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_TurnTimeSheet">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_TurnTimeSheet">
+              <MappingFragment StoreEntitySet="Tbl_TurnTimeSheet">
+                <ScalarProperty Name="TTS_IsDelete" ColumnName="TTS_IsDelete" />
+                <ScalarProperty Name="TTS_IsActive" ColumnName="TTS_IsActive" />
+                <ScalarProperty Name="TTS_MaxSize" ColumnName="TTS_MaxSize" />
+                <ScalarProperty Name="TTS_Name" ColumnName="TTS_Name" />
+                <ScalarProperty Name="TTS_TurnID" ColumnName="TTS_TurnID" />
+                <ScalarProperty Name="TTS_Guid" ColumnName="TTS_Guid" />
+                <ScalarProperty Name="TTS_ID" ColumnName="TTS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_University">
+            <EntityTypeMapping TypeName="HealthModel.Tbl_University">
+              <MappingFragment StoreEntitySet="Tbl_University">
+                <ScalarProperty Name="University_IsDelete" ColumnName="University_IsDelete" />
+                <ScalarProperty Name="University_Display" ColumnName="University_Display" />
+                <ScalarProperty Name="University_Name" ColumnName="University_Name" />
+                <ScalarProperty Name="University_Guid" ColumnName="University_Guid" />
+                <ScalarProperty Name="University_ID" ColumnName="University_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_FormList>
+
+@{
+    ViewBag.Title = "لیست پرسش نامه ها";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">پرسش نامه ها</li>
+        </ol>
+    </nav>
+
+    @*<div class="pull-left">
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+    </div>*@
+
+    <div class="pull-right">
+        <a href="javascript:void(0)" onclick="Create()" data-toggle='tooltip' data-placement='auto' title='افزودن پرسش نامه'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
+    </div>
+
+</div>
+
+<div class="panel panel-default">
+
+    <div class="panel-body table-body" style="overflow-x:auto;">
+
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Form_Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Form_QuestionCount)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Form_StepCount)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Form_CreateDate)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Form_IsActive)</th>
+                    <th scope="col" data-orderable="false">کنترل</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int x = 0;
+                }
+
+                @foreach (var item in Model)
+                {
+                    x++;
+
+                    <tr>
+                        <td scope="row">@x</td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Form_Name) </span>
+                        </td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Form_QuestionCount) </span>
+                        </td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Form_StepCount) </span>
+                        </td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Form_CreateDate) </span>
+                        </td>
+                        <td scope="row">
+                            <span> @(item.Form_IsActive ? "فعال" : "غیر فعال") </span>
+                        </td>
+
+                        <td scope="row">
+                            <a class="control btn btn-primary btn-sm glyphicon glyphicon-th-list" data-toggle='tooltip' data-placement='auto' title='مراحل' href="@Url.Action("Index", "Step", new { id = item.ID, formDisplay = item.Form_Name })"></a>
+                            <a class="control btn btn-success btn-sm glyphicon glyphicon-plus" data-toggle='tooltip' data-placement='auto' title='افزودن مرحله' href="javascript:void(0)" onclick="AddStep(@item.ID)"></a>
+                            <a class="control btn btn-info btn-sm glyphicon glyphicon-list" data-toggle='tooltip' data-placement='auto' title='سوالات' href="@Url.Action("Index", "Question", new { id = item.ID, formDisplay = item.Form_Name })"></a>
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="Edit(@item.ID)"></a>
+                            <a class="control btn wtiau-btn-wtiau btn-sm glyphicon glyphicon-ok" data-toggle='tooltip' data-placement='auto' title='تغییر وضعیت نمایش' href="javascript:void(0)" onclick="SetActiveness(@item.ID)"></a>
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+@Html.Partial("_Modal")
+
+
+@section Modal {
+
+    <script>
+
+        function Delete(id) {
+            $.ajax({
+                url: "/Form/DeleteForm/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('حدف پرسش نامه');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Edit(id) {
+            $.ajax({
+                url: "/Form/EditForm/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('ویرایش پرسش نامه');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Create() {
+            $.ajax({
+                url: "/Form/CreateForm",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن پرسش نامه');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function AddStep(id) {
+            $.ajax({
+                url: "/Form/AddStep/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن مرحله');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function SetActiveness(id) {
+            $.ajax({
+                url: "/Form/SetActiveness/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('تغییر وضعیت نمایش');
+                $('#myModalBody').html(result);
+            });
+        }
+
+    </script>
+
+}

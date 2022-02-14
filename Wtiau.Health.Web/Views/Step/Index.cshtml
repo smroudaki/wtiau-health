@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Wtiau.Health.Web.Models.ViewModels.Model_FormStepList>
+
+@{
+    ViewBag.Title = "مراحل";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="panel panel-body panel-default navigation">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Form")" data-toggle="tooltip" data-placement="auto" title="پرسش نامه ها">@ViewBag.FormDisplay</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+
+    <div class="pull-left" style="margin-left: 10px;" data-toggle='tooltip' data-placement='auto' title='برگشت به صفحه قبل'>
+        <a href="@Url.Action("Index", "Form")">
+            <i class="glyphicon glyphicon-arrow-left navigation-btn-icon"></i>
+        </a>
+    </div>
+
+    <div class="pull-left">
+        <h4 class="navigation-title"><b>@ViewBag.Title</b></h4>
+    </div>
+
+    <div class="pull-right">
+        <a href="javascript:void(0)" onclick="AddStep(@ViewBag.ID)" data-toggle='tooltip' data-placement='auto' title='ثبت مرحله جدید'>
+            <i class="glyphicon glyphicon-plus navigation-btn-icon"></i>
+        </a>
+    </div>
+
+</div>
+
+<div class="panel panel-default">
+
+    <div class="panel-body table-body" style="overflow-x:auto;">
+
+        <table id="DateTable" class="table table-bordered table-striped table-secondary" style="width:100%;">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Display)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.QuestionCount)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Order)</th>
+                    <th scope="col" data-orderable="false">کنترل</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int x = 0;
+                }
+
+                @foreach (var item in Model)
+                {
+                    x++;
+
+                    <tr>
+                        <td scope="row">@x</td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Name) </span>
+                        </td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Display) </span>
+                        </td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.QuestionCount) </span>
+                        </td>
+                        <td scope="row">
+                            <span> @Html.DisplayFor(modelItem => item.Order) </span>
+                        </td>
+
+                        <td scope="row">
+                            <a class="control btn btn-warning btn-sm glyphicon glyphicon-edit" data-toggle='tooltip' data-placement='auto' title='ویرایش' href="javascript:void(0)" onclick="@item.ID)"></a>
+                            <a class="control btn btn-danger btn-sm glyphicon glyphicon-trash" data-toggle='tooltip' data-placement='auto' title='حذف' href="javascript:void(0)" onclick="Delete(@item.ID)"></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+@Html.Partial("_Modal")
+
+@section Modal {
+    <script>
+
+        function Delete(id) {
+            $.ajax({
+                url: "/Dashboard/Exam/Delete/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('حدف آزمون');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function Edit() {
+            $.ajax({
+                url: "/Form/CreateForm",
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن فرم');
+                $('#myModalBody').html(result);
+            });
+        }
+
+        function AddStep(id) {
+            $.ajax({
+                url: "/Form/AddStep/" + id,
+                type: "Get",
+                data: {}
+            }).done(function (result) {
+                $('#myModal').modal('show');
+                $('#myModalLabel').html('افزودن مرحله');
+                $('#myModalBody').html(result);
+            });
+        }
+
+    </script>
+}

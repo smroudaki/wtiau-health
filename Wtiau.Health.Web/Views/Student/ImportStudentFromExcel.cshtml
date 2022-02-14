@@ -1,0 +1,25 @@
+﻿
+
+@using (Html.BeginForm("ImportStudentFromExcel", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="modal-main">
+
+
+        <div class="form-group">
+            <label class="">فایل</label>
+
+            <input type="file" class="filestyle" data-icon="false">
+        </div>
+
+    </div>
+    <div class="">
+        <button class="btn btn-danger modal-btn-Dual pull-left" type="button" data-dismiss="modal">انصراف</button>
+        <button class="btn btn-success modal-btn-Dual pull-right " type="submit" name="btn-Delete">تایید</button>
+    </div>
+}
+
+
+<script src="~/Scripts/Plugins/bootstrap-filestyle.min.js"></script>
+
+
+
